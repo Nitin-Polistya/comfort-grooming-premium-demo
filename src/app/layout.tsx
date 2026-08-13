@@ -15,19 +15,18 @@ const displayFont = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Comfort Grooming | Premium Pet Grooming in Pinson, AL",
+  title: "Comfort Grooming | Pet Grooming in Pinson, AL",
   description:
-    "Dedicated one-on-one pet grooming in Pinson, Alabama. Low-stress, calm care for dogs of all sizes. Call (205) 623-7991 to schedule.",
+    "Attentive pet grooming in Pinson, Alabama. Located at 4298 Main St. Call +1 (205) 623-7991 to discuss the right grooming option for your dog.",
   keywords: [
     "Comfort Grooming",
     "dog grooming Pinson AL",
     "pet groomer Pinson Alabama",
-    "Pinson dog salon",
-    "one on one dog grooming",
+    "4298 Main St Pinson",
   ],
   openGraph: {
-    title: "Comfort Grooming | Dedicated Pet Care in Pinson, AL",
-    description: "One-on-one pet grooming in a calm, low-stress environment. Call (205) 623-7991.",
+    title: "Comfort Grooming | Pet Grooming in Pinson, AL",
+    description: "Attentive pet grooming located at 4298 Main St, Pinson, AL 35126. Call (205) 623-7991.",
     url: "https://comfort-grooming-premium-demo.vercel.app",
     siteName: "Comfort Grooming",
     locale: "en_US",
@@ -44,11 +43,10 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "GroomingSalon",
     "name": "Comfort Grooming",
-    "image": "https://comfort-grooming-premium-demo.vercel.app/og-image.jpg",
     "telephone": "+12056237991",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "4289 Main St",
+      "streetAddress": "4298 Main St",
       "addressLocality": "Pinson",
       "addressRegion": "AL",
       "postalCode": "35126",
@@ -58,27 +56,7 @@ export default function RootLayout({
       "@type": "GeoCoordinates",
       "latitude": 33.6865,
       "longitude": -86.6828
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday", "Thursday", "Friday"],
-        "opens": "08:00",
-        "closes": "15:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Wednesday",
-        "opens": "08:00",
-        "closes": "14:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "08:00",
-        "closes": "12:00"
-      }
-    ]
+    }
   };
 
   return (

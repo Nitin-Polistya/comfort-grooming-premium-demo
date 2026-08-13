@@ -1,29 +1,29 @@
 "use client";
 
 import React from "react";
-import { Heart, ShieldAlert, Sparkles, Smile } from "lucide-react";
+import { Heart, ShieldCheck, Sparkles, PhoneCall } from "lucide-react";
 
 export default function WhyComfortMatters() {
   const points = [
     {
       icon: Heart,
-      title: "Patient 1-on-1 Care",
-      desc: "Every pet is cared for individually. We take breaks when needed to ensure your pet never feels rushed or overwhelmed.",
+      title: "Attentive Pet Care",
+      desc: "Every pet is handled with patience and care to keep their grooming session positive.",
     },
     {
-      icon: ShieldAlert,
-      title: "Gentle for Anxious Pets",
-      desc: "Dremel nail filing, quiet driers, and soft vocal reassurance create a calm atmosphere even for nervous dogs.",
+      icon: ShieldCheck,
+      title: "Individualized Focus",
+      desc: "We focus on your dog's comfort and take breaks whenever necessary.",
     },
     {
       icon: Sparkles,
-      title: "Sanitary & Clean Products",
-      desc: "We use gentle, high-grade shampoos and conditioners that protect skin moisture and leave coat manageable.",
+      title: "Quality Grooming Care",
+      desc: "Using gentle shampoos and coat care techniques appropriate for your pet.",
     },
     {
-      icon: Smile,
-      title: "Clear Communication",
-      desc: "Speak directly with your groomer about specific haircuts, coat maintenance tips, or health observations.",
+      icon: PhoneCall,
+      title: "Direct Contact",
+      desc: "Call or message Comfort Grooming directly to discuss your pet's needs.",
     },
   ];
 
@@ -43,11 +43,11 @@ export default function WhyComfortMatters() {
             </h2>
 
             <p className="text-lg text-stone-600 leading-relaxed">
-              At Comfort Grooming in Pinson, we believe grooming shouldn't be a stressful chore for your pet. Our dedicated one-on-one setup ensures your dog feels safe, respected, and pampered from start to finish.
+              At Comfort Grooming in Pinson, we focus on providing attentive, individualized pet grooming in a welcoming salon setting.
             </p>
 
             <blockquote className="p-6 rounded-2xl bg-white border-l-4 border-amber-800 shadow-sm text-stone-700 italic font-serif text-lg">
-              "Creating a quiet, low-stress space makes all the difference—especially for pups who get nervous around loud salons."
+              "Every pet deserves patient care, gentle handling, and a groomer who truly listens to their needs."
             </blockquote>
           </div>
 

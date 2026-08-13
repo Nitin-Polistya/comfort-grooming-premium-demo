@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Phone, MapPin, MessageSquare, Clock, Navigation } from "lucide-react";
+import { Phone, MapPin, MessageSquare, Navigation } from "lucide-react";
 
 export default function ContactSection() {
   return (
@@ -13,23 +13,22 @@ export default function ContactSection() {
             Visit Us in Pinson
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight">
-            Schedule your pet's appointment today.
+            Contact Comfort Grooming today.
           </h2>
           <p className="text-lg text-stone-300">
-            Call or text us directly to discuss your dog's grooming options and book a convenient slot.
+            Call or send a text message directly to discuss the right grooming option for your pet and schedule an appointment.
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
-          {/* Business Info Card */}
-          <div className="lg:col-span-5 bg-stone-800/90 rounded-3xl p-8 border border-stone-700/80 space-y-8 shadow-xl">
+          <div className="lg:col-span-6 bg-stone-800/90 rounded-3xl p-8 border border-stone-700/80 space-y-8 shadow-xl">
             <div>
               <h3 className="text-2xl font-bold font-serif text-white mb-2">
                 Comfort Grooming
               </h3>
               <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
-                Comfort Grooming & Daycare LLC
+                Comfort Grooming and Daycare LLC
               </p>
             </div>
 
@@ -38,7 +37,7 @@ export default function ContactSection() {
                 <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold text-white">Salon Address</p>
-                  <p className="text-stone-300">4289 Main Street</p>
+                  <p className="text-stone-300">4298 Main St</p>
                   <p className="text-stone-300">Pinson, AL 35126</p>
                 </div>
               </div>
@@ -47,19 +46,19 @@ export default function ContactSection() {
                 <Phone className="w-5 h-5 text-amber-400 shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold text-white">Phone & Text</p>
-                  <a href="tel:+12056237991" className="text-amber-300 font-bold hover:underline">
+                  <a href="tel:+12056237991" className="text-amber-300 font-bold hover:underline text-lg">
                     +1 (205) 623-7991
                   </a>
-                  <p className="text-xs text-stone-400">Call or send a text to book</p>
+                  <p className="text-xs text-stone-400">Call or send a text message</p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5 pt-2">
                 <MessageSquare className="w-5 h-5 text-blue-400 shrink-0 mt-1" />
                 <div>
-                  <p className="font-semibold text-white">Facebook Presence</p>
+                  <p className="font-semibold text-white">Facebook Page</p>
                   <a
-                    href="https://www.facebook.com/profile.php?id=100063620959419"
+                    href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-300 text-sm hover:underline"
@@ -70,7 +69,6 @@ export default function ContactSection() {
               </div>
             </div>
 
-            {/* CTAs */}
             <div className="pt-4 space-y-3">
               <a
                 href="tel:+12056237991"
@@ -81,7 +79,7 @@ export default function ContactSection() {
               </a>
 
               <a
-                href="https://maps.google.com/?q=4289+Main+St,+Pinson,+AL+35126"
+                href="https://maps.google.com/?q=4298+Main+St,+Pinson,+AL+35126"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-stone-700 text-stone-100 font-medium text-sm hover:bg-stone-600 transition-colors"
@@ -92,55 +90,25 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Operating Hours & Location Map Card */}
-          <div className="lg:col-span-7 bg-stone-800/90 rounded-3xl p-8 border border-stone-700/80 space-y-8 shadow-xl">
-            
-            <div>
-              <div className="flex items-center gap-2 text-amber-400 mb-2">
-                <Clock className="w-5 h-5" />
-                <h3 className="text-xl font-bold font-serif text-white">
-                  Operating Hours
-                </h3>
+          <div className="lg:col-span-6 bg-stone-800/90 rounded-3xl p-8 border border-stone-700/80 space-y-6 shadow-xl text-center flex flex-col justify-between h-full">
+            <div className="space-y-4">
+              <div className="w-16 h-16 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto text-3xl font-bold">
+                📍
               </div>
-              <p className="text-xs text-stone-400">
-                Please call in advance to confirm daily appointment availability.
+              <h3 className="text-2xl font-bold font-serif text-white">
+                Located in Pinson, AL
+              </h3>
+              <p className="text-stone-300 text-sm max-w-md mx-auto leading-relaxed">
+                Comfort Grooming is conveniently located at <strong className="text-white">4298 Main St, Pinson, AL 35126</strong>.
               </p>
             </div>
 
-            <div className="divide-y divide-stone-700/60 text-sm">
-              <div className="py-2.5 flex justify-between">
-                <span className="text-stone-300 font-medium">Tuesday</span>
-                <span className="text-white font-semibold">8:00 AM – 3:00 PM</span>
-              </div>
-              <div className="py-2.5 flex justify-between">
-                <span className="text-stone-300 font-medium">Wednesday</span>
-                <span className="text-white font-semibold">8:00 AM – 2:00 PM</span>
-              </div>
-              <div className="py-2.5 flex justify-between">
-                <span className="text-stone-300 font-medium">Thursday</span>
-                <span className="text-white font-semibold">8:00 AM – 3:00 PM</span>
-              </div>
-              <div className="py-2.5 flex justify-between">
-                <span className="text-stone-300 font-medium">Friday</span>
-                <span className="text-white font-semibold">8:00 AM – 3:00 PM</span>
-              </div>
-              <div className="py-2.5 flex justify-between">
-                <span className="text-stone-300 font-medium">Saturday</span>
-                <span className="text-white font-semibold">8:00 AM – 12:00 PM</span>
-              </div>
-              <div className="py-2.5 flex justify-between text-stone-500">
-                <span>Sunday & Monday</span>
-                <span>Closed</span>
-              </div>
+            <div className="p-6 rounded-2xl bg-stone-900/90 border border-stone-700 text-left space-y-3">
+              <p className="text-amber-300 font-semibold text-sm">📅 How to Schedule</p>
+              <p className="text-xs text-stone-300 leading-relaxed">
+                Please call or text us at <strong className="text-white">+1 (205) 623-7991</strong> or send a message on Facebook to discuss your dog's needs and arrange a grooming time.
+              </p>
             </div>
-
-            {/* Visual Location Frame */}
-            <div className="p-6 rounded-2xl bg-stone-900/90 border border-stone-700 text-center space-y-3">
-              <span className="block text-2xl">📍</span>
-              <p className="text-white font-bold text-base">4289 Main Street, Pinson, AL 35126</p>
-              <p className="text-xs text-stone-400">Located conveniently in downtown Pinson for easy drop-off and pick-up.</p>
-            </div>
-
           </div>
 
         </div>

@@ -23,165 +23,174 @@ export default function InteractiveDog({ isCtaHovered = false }: InteractiveDogP
     const px = state.pointer.x;
     const py = state.pointer.y;
 
-    targetRotation.current.y = THREE.MathUtils.lerp(targetRotation.current.y, px * 0.45, delta * 4);
-    targetRotation.current.x = THREE.MathUtils.lerp(targetRotation.current.x, -py * 0.35, delta * 4);
+    targetRotation.current.y = THREE.MathUtils.lerp(targetRotation.current.y, px * 0.5, delta * 4);
+    targetRotation.current.x = THREE.MathUtils.lerp(targetRotation.current.x, -py * 0.3, delta * 4);
 
     if (headRef.current) {
       headRef.current.rotation.y = targetRotation.current.y;
       headRef.current.rotation.x = targetRotation.current.x;
 
       if (earLeftRef.current && earRightRef.current) {
-        const earTilt = isCtaHovered ? -0.15 : Math.sin(state.clock.getElapsedTime() * 3) * 0.05;
-        earLeftRef.current.rotation.z = THREE.MathUtils.lerp(earLeftRef.current.rotation.z, -0.2 + earTilt + px * 0.1, delta * 5);
-        earRightRef.current.rotation.z = THREE.MathUtils.lerp(earRightRef.current.rotation.z, 0.2 - earTilt + px * 0.1, delta * 5);
+        const earTilt = isCtaHovered ? -0.2 : Math.sin(state.clock.getElapsedTime() * 3.5) * 0.06;
+        earLeftRef.current.rotation.z = THREE.MathUtils.lerp(earLeftRef.current.rotation.z, -0.25 + earTilt + px * 0.1, delta * 5);
+        earRightRef.current.rotation.z = THREE.MathUtils.lerp(earRightRef.current.rotation.z, 0.25 - earTilt + px * 0.1, delta * 5);
       }
     }
 
     if (dogGroupRef.current) {
-      const breath = Math.sin(state.clock.getElapsedTime() * 2.2) * 0.04;
-      const hoverBoost = isCtaHovered ? 0.15 : 0;
+      const breath = Math.sin(state.clock.getElapsedTime() * 2.4) * 0.05;
+      const hoverLift = isCtaHovered ? 0.18 : 0;
       dogGroupRef.current.position.y = THREE.MathUtils.lerp(
         dogGroupRef.current.position.y,
-        -0.4 + breath + hoverBoost,
+        -0.45 + breath + hoverLift,
         delta * 4
       );
     }
 
     if (tailRef.current) {
-      const targetSpeed = isCtaHovered ? 14 : 5;
+      const targetSpeed = isCtaHovered ? 16 : 5;
       tailWagSpeed.current = THREE.MathUtils.lerp(tailWagSpeed.current, targetSpeed, delta * 3);
-      const wag = Math.sin(state.clock.getElapsedTime() * tailWagSpeed.current) * (isCtaHovered ? 0.45 : 0.22);
+      const wag = Math.sin(state.clock.getElapsedTime() * tailWagSpeed.current) * (isCtaHovered ? 0.5 : 0.25);
       tailRef.current.rotation.y = wag;
-      tailRef.current.rotation.z = Math.abs(wag) * 0.15;
+      tailRef.current.rotation.z = Math.abs(wag) * 0.18;
     }
   });
 
-  const furColor = new THREE.Color("#E8CDB5");
-  const furFluffColor = new THREE.Color("#F4E8DB");
-  const noseColor = new THREE.Color("#1F1A17");
+  // Refined Boutique Fur Colors
+  const furBaseColor = new THREE.Color("#E5CBB4");
+  const furFluffColor = new THREE.Color("#F6EDE4");
+  const noseColor = new THREE.Color("#1C1715");
   const collarColor = new THREE.Color("#C8654B");
   const brassColor = new THREE.Color("#D99B26");
 
   return (
-    <group ref={dogGroupRef} position={[0, -0.4, 0]} scale={1.1}>
-      {/* BODY / CHEST */}
-      <mesh position={[0, 0.2, 0]} castShadow receiveShadow>
-        <sphereGeometry args={[0.9, 32, 32]} />
-        <meshStandardMaterial
-          color={furColor}
-          roughness={0.8}
-          metalness={0.1}
-        />
+    <group ref={dogGroupRef} position={[0, -0.45, 0]} scale={1.15}>
+      
+      {/* MAIN BODY SCULPTURE */}
+      <mesh position={[0, 0.25, 0]} castShadow receiveShadow>
+        <sphereGeometry args={[0.92, 32, 32]} />
+        <meshStandardMaterial color={furBaseColor} roughness={0.82} metalness={0.05} />
       </mesh>
 
-      {/* FLUFFY CHEST TUFT */}
-      <mesh position={[0, 0.35, 0.4]} scale={[0.7, 0.7, 0.5]} castShadow>
-        <sphereGeometry args={[0.7, 24, 24]} />
-        <meshStandardMaterial color={furFluffColor} roughness={0.9} />
+      {/* CHEST FUR FLUFF */}
+      <mesh position={[0, 0.4, 0.42]} scale={[0.75, 0.72, 0.52]} castShadow>
+        <sphereGeometry args={[0.72, 24, 24]} />
+        <meshStandardMaterial color={furFluffColor} roughness={0.92} />
       </mesh>
 
-      {/* HEAD GROUP */}
-      <group ref={headRef} position={[0, 1.25, 0.15]}>
+      {/* HEAD ASSEMBLY */}
+      <group ref={headRef} position={[0, 1.3, 0.16]}>
+        {/* HEAD BASE */}
         <mesh castShadow receiveShadow>
-          <sphereGeometry args={[0.72, 32, 32]} />
-          <meshStandardMaterial color={furColor} roughness={0.85} />
+          <sphereGeometry args={[0.74, 32, 32]} />
+          <meshStandardMaterial color={furBaseColor} roughness={0.82} />
         </mesh>
 
-        <mesh position={[0, 0.65, -0.05]} scale={[0.55, 0.45, 0.5]} castShadow>
-          <sphereGeometry args={[0.6, 24, 24]} />
+        {/* POODLE/DOODLE TOPKNOT CROWN */}
+        <mesh position={[0, 0.68, -0.04]} scale={[0.58, 0.48, 0.52]} castShadow>
+          <sphereGeometry args={[0.62, 24, 24]} />
           <meshStandardMaterial color={furFluffColor} roughness={0.95} />
         </mesh>
 
-        <mesh position={[0, -0.1, 0.5]} scale={[0.42, 0.36, 0.45]} castShadow>
-          <sphereGeometry args={[0.7, 24, 24]} />
-          <meshStandardMaterial color={furFluffColor} roughness={0.8} />
+        {/* MUZZLE & SNOUT */}
+        <mesh position={[0, -0.1, 0.52]} scale={[0.44, 0.38, 0.48]} castShadow>
+          <sphereGeometry args={[0.72, 24, 24]} />
+          <meshStandardMaterial color={furFluffColor} roughness={0.82} />
         </mesh>
 
-        <mesh position={[0, 0.05, 0.78]} scale={[0.16, 0.12, 0.14]} castShadow>
+        {/* WET GLOSSY NOSE */}
+        <mesh position={[0, 0.06, 0.81]} scale={[0.17, 0.13, 0.15]} castShadow>
           <sphereGeometry args={[0.8, 16, 16]} />
-          <meshStandardMaterial color={noseColor} roughness={0.2} metalness={0.2} />
+          <meshStandardMaterial color={noseColor} roughness={0.15} metalness={0.3} />
         </mesh>
 
-        {/* Left Eye */}
-        <group position={[-0.26, 0.18, 0.55]}>
+        {/* LEFT EYE */}
+        <group position={[-0.27, 0.19, 0.57]}>
           <mesh>
-            <sphereGeometry args={[0.11, 16, 16]} />
-            <meshStandardMaterial color="#1A1615" roughness={0.1} />
+            <sphereGeometry args={[0.115, 16, 16]} />
+            <meshStandardMaterial color="#120E0D" roughness={0.08} />
           </mesh>
-          <mesh position={[-0.03, 0.03, 0.09]}>
-            <sphereGeometry args={[0.03, 8, 8]} />
+          <mesh position={[-0.035, 0.035, 0.095]}>
+            <sphereGeometry args={[0.032, 8, 8]} />
+            <meshBasicMaterial color="#FFFFFF" />
+          </mesh>
+          <mesh position={[0.02, -0.02, 0.09]}>
+            <sphereGeometry args={[0.015, 8, 8]} />
             <meshBasicMaterial color="#FFFFFF" />
           </mesh>
         </group>
 
-        {/* Right Eye */}
-        <group position={[0.26, 0.18, 0.55]}>
+        {/* RIGHT EYE */}
+        <group position={[0.27, 0.19, 0.57]}>
           <mesh>
-            <sphereGeometry args={[0.11, 16, 16]} />
-            <meshStandardMaterial color="#1A1615" roughness={0.1} />
+            <sphereGeometry args={[0.115, 16, 16]} />
+            <meshStandardMaterial color="#120E0D" roughness={0.08} />
           </mesh>
-          <mesh position={[-0.03, 0.03, 0.09]}>
-            <sphereGeometry args={[0.03, 8, 8]} />
+          <mesh position={[-0.035, 0.035, 0.095]}>
+            <sphereGeometry args={[0.032, 8, 8]} />
+            <meshBasicMaterial color="#FFFFFF" />
+          </mesh>
+          <mesh position={[0.02, -0.02, 0.09]}>
+            <sphereGeometry args={[0.015, 8, 8]} />
             <meshBasicMaterial color="#FFFFFF" />
           </mesh>
         </group>
 
-        {/* Left Ear */}
-        <group ref={earLeftRef} position={[-0.65, 0.25, 0]} rotation={[0, 0, -0.2]}>
-          <mesh position={[0, -0.4, 0]} scale={[0.28, 0.6, 0.28]} castShadow>
+        {/* FLOPPY EARS */}
+        <group ref={earLeftRef} position={[-0.68, 0.28, 0]} rotation={[0, 0, -0.22]}>
+          <mesh position={[0, -0.42, 0]} scale={[0.3, 0.65, 0.3]} castShadow>
             <sphereGeometry args={[0.8, 24, 24]} />
-            <meshStandardMaterial color={furColor} roughness={0.9} />
+            <meshStandardMaterial color={furBaseColor} roughness={0.9} />
           </mesh>
         </group>
 
-        {/* Right Ear */}
-        <group ref={earRightRef} position={[0.65, 0.25, 0]} rotation={[0, 0, 0.2]}>
-          <mesh position={[0, -0.4, 0]} scale={[0.28, 0.6, 0.28]} castShadow>
+        <group ref={earRightRef} position={[0.68, 0.28, 0]} rotation={[0, 0, 0.22]}>
+          <mesh position={[0, -0.42, 0]} scale={[0.3, 0.65, 0.3]} castShadow>
             <sphereGeometry args={[0.8, 24, 24]} />
-            <meshStandardMaterial color={furColor} roughness={0.9} />
+            <meshStandardMaterial color={furBaseColor} roughness={0.9} />
           </mesh>
         </group>
       </group>
 
-      {/* COLLAR */}
-      <group position={[0, 0.65, 0.1]} rotation={[0.1, 0, 0]}>
+      {/* LEATHER COLLAR & BRASS TAG */}
+      <group position={[0, 0.68, 0.1]} rotation={[0.1, 0, 0]}>
         <mesh castShadow>
-          <torusGeometry args={[0.68, 0.05, 16, 32]} />
-          <meshStandardMaterial color={collarColor} roughness={0.4} />
+          <torusGeometry args={[0.7, 0.052, 16, 32]} />
+          <meshStandardMaterial color={collarColor} roughness={0.35} />
         </mesh>
-        <mesh position={[0, -0.15, 0.68]} castShadow>
-          <cylinderGeometry args={[0.08, 0.08, 0.02, 16]} />
-          <meshStandardMaterial color={brassColor} metalness={0.8} roughness={0.2} />
+        <mesh position={[0, -0.16, 0.7]} castShadow>
+          <cylinderGeometry args={[0.085, 0.085, 0.022, 16]} />
+          <meshStandardMaterial color={brassColor} metalness={0.85} roughness={0.15} />
         </mesh>
       </group>
 
       {/* TAIL */}
-      <group ref={tailRef} position={[0, 0.2, -0.8]} rotation={[-0.4, 0, 0]}>
-        <mesh position={[0, 0.4, -0.2]} scale={[0.22, 0.5, 0.22]} castShadow>
+      <group ref={tailRef} position={[0, 0.22, -0.82]} rotation={[-0.42, 0, 0]}>
+        <mesh position={[0, 0.42, -0.2]} scale={[0.24, 0.52, 0.24]} castShadow>
           <sphereGeometry args={[0.8, 24, 24]} />
           <meshStandardMaterial color={furFluffColor} roughness={0.9} />
         </mesh>
       </group>
 
-      {/* SHADOW */}
+      {/* FLOOR SHADOW */}
       <ContactShadows
-        position={[0, -0.9, 0]}
+        position={[0, -0.92, 0]}
         opacity={0.45}
-        scale={6}
+        scale={6.5}
         blur={2}
-        far={3}
+        far={3.2}
         color="#2B221E"
       />
 
-      {/* BUBBLES */}
+      {/* REFRACTIVE FLOATING BUBBLES */}
       <Float speed={2} rotationIntensity={0.5} floatIntensity={1.2}>
-        <mesh position={[-1.4, 1.2, 0.6]}>
-          <sphereGeometry args={[0.16, 24, 24]} />
+        <mesh position={[-1.45, 1.25, 0.65]}>
+          <sphereGeometry args={[0.17, 24, 24]} />
           <meshPhysicalMaterial
-            roughness={0.05}
-            transmission={0.9}
-            thickness={0.4}
-            ior={1.2}
+            roughness={0.04}
+            transmission={0.95}
+            thickness={0.45}
+            ior={1.3}
             color="#E0F2FE"
             transparent
             opacity={0.85}
@@ -190,31 +199,31 @@ export default function InteractiveDog({ isCtaHovered = false }: InteractiveDogP
       </Float>
 
       <Float speed={2.5} rotationIntensity={0.8} floatIntensity={1.5}>
-        <mesh position={[1.5, 0.8, -0.4]}>
-          <sphereGeometry args={[0.22, 24, 24]} />
+        <mesh position={[1.55, 0.85, -0.45]}>
+          <sphereGeometry args={[0.23, 24, 24]} />
           <meshPhysicalMaterial
-            roughness={0.05}
-            transmission={0.92}
-            thickness={0.4}
-            ior={1.2}
+            roughness={0.04}
+            transmission={0.95}
+            thickness={0.45}
+            ior={1.3}
             color="#FCE7F3"
             transparent
-            opacity={0.8}
+            opacity={0.82}
           />
         </mesh>
       </Float>
 
       <Float speed={1.8} rotationIntensity={0.4} floatIntensity={0.9}>
-        <mesh position={[-1.1, -0.2, 1.1]}>
-          <sphereGeometry args={[0.12, 20, 20]} />
+        <mesh position={[-1.15, -0.15, 1.15]}>
+          <sphereGeometry args={[0.13, 20, 20]} />
           <meshPhysicalMaterial
-            roughness={0.05}
-            transmission={0.88}
-            thickness={0.3}
-            ior={1.2}
+            roughness={0.04}
+            transmission={0.92}
+            thickness={0.35}
+            ior={1.3}
             color="#FEF3C7"
             transparent
-            opacity={0.8}
+            opacity={0.82}
           />
         </mesh>
       </Float>

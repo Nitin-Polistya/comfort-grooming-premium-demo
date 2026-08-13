@@ -1,29 +1,29 @@
 "use client";
 
 import React from "react";
-import { HeartHandshake, Shield, Sparkles, Clock } from "lucide-react";
+import { HeartHandshake, Shield, Sparkles, PhoneCall } from "lucide-react";
 
 export default function LocalTrustStrip() {
   const pillars = [
     {
       icon: HeartHandshake,
-      title: "One-on-One Attention",
-      desc: "No loud chaotic assembly line. Your pet has our groomer's complete focus.",
+      title: "Local Pinson Groomer",
+      desc: "Dedicated pet care business rooted right here on Main Street in Pinson, Alabama.",
     },
     {
       icon: Shield,
-      title: "Low-Stress Environment",
-      desc: "Specialized calm handling techniques tailored for anxious or sensitive pups.",
+      title: "Personalized Pet Care",
+      desc: "Attentive handling focused on creating a calm and comfortable environment for your dog.",
     },
     {
       icon: Sparkles,
-      title: "All Sizes Welcome",
-      desc: "From delicate Chihuahuas to Goldendoodles and large family companions.",
+      title: "Care for Various Breeds",
+      desc: "Welcoming companion dogs of different sizes, coat types, and grooming needs.",
     },
     {
-      icon: Clock,
-      title: "Direct Scheduling",
-      desc: "Call or text directly at (205) 623-7991 to find the perfect grooming time.",
+      icon: PhoneCall,
+      title: "Direct Call or Text",
+      desc: "Reach us directly at (205) 623-7991 to discuss your pet and schedule an appointment.",
     },
   ];
 

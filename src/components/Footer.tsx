@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Heart, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -15,7 +15,7 @@ export default function Footer() {
             </div>
             <div>
               <span className="text-white font-bold font-serif text-base block">Comfort Grooming</span>
-              <span className="text-stone-500 text-[11px]">4289 Main St, Pinson, AL 35126</span>
+              <span className="text-stone-500 text-[11px]">4298 Main St, Pinson, AL 35126</span>
             </div>
           </div>
 
@@ -24,15 +24,15 @@ export default function Footer() {
               Call (205) 623-7991
             </a>
             <a
-              href="https://www.facebook.com/profile.php?id=100063620959419"
+              href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-amber-400 transition-colors"
             >
-              Facebook
+              Facebook Page
             </a>
             <a
-              href="https://maps.google.com/?q=4289+Main+St,+Pinson,+AL+35126"
+              href="https://maps.google.com/?q=4298+Main+St,+Pinson,+AL+35126"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-amber-400 transition-colors"
@@ -45,7 +45,7 @@ export default function Footer() {
         <div className="pt-6 border-t border-stone-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-stone-500">
           <p>© {new Date().getFullYear()} Comfort Grooming and Daycare LLC. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            <span>Bespoke 3D Sales Demo by</span>
+            <span>Bespoke 3D Website Demo by</span>
             <span className="text-stone-300 font-semibold">Paldren</span>
           </p>
         </div>

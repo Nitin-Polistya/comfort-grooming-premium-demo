@@ -6,42 +6,42 @@ import { Sparkles, Scissors, Bath, Check } from "lucide-react";
 export default function ServicesSection() {
   const services = [
     {
-      badge: "Full Spa Day",
-      title: "The Signature Bath & Groom",
+      badge: "Full Service",
+      title: "Bath & Complete Grooming",
       icon: Sparkles,
-      desc: "Complete head-to-paw care designed to leave your dog refreshed, soft, and comfortable.",
+      desc: "Thorough coat bath, drying, coat brushing, and overall pet care tailored to your dog.",
       highlights: [
-        "Hydro-surge relaxing bath with premium shampoos",
-        "Gentle hand blow-dry & coat brush out",
-        "Breed-specific styling or custom scissor trim",
-        "Sanitary trim & paw pad tidy",
-        "Nail clipping & ear cleaning",
+        "Soothing coat bath & gentle drying",
+        "Thorough coat brush out",
+        "Neat scissor styling trim",
+        "Clean ear inspection",
+        "Nail trim care",
       ],
     },
     {
-      badge: "Maintenance Care",
-      title: "Precision Tidy-Up & Scissoring",
+      badge: "Maintenance",
+      title: "Tidy-Up & Scissoring",
       icon: Scissors,
-      desc: "Ideal between full groomings to keep face, paws, and coat neat and manageable.",
+      desc: "Great for keeping face, paws, and coat neat and manageable between full appointments.",
       highlights: [
-        "Face, eye, and muzzle scissor trimming",
-        "Paw pad shaving & foot shaping",
-        "Sanitary area cleanup",
-        "Thorough deshedding coat brush out",
-        "Refreshing coat mist & bandana finish",
+        "Face & eye area scissor touch-up",
+        "Paw & pad cleanup",
+        "Deshedding coat brush out",
+        "Sanitary trim care",
+        "Refreshing finish",
       ],
     },
     {
       badge: "Gentle Care",
-      title: "Spa Bath & Anxious Pet Care",
+      title: "Attentive Care Session",
       icon: Bath,
-      desc: "Patient handling tailored for dogs that need extra time, calm reassurance, or delicate touch.",
+      desc: "Personalized attention tailored for pets needing extra patience, reassurance, or soft handling.",
       highlights: [
-        "Soothing bath with hypoallergenic formulas",
-        "Low-noise dryer options for noise-sensitive dogs",
-        "Gentle nail dremel filing (smooth edges)",
-        "Nail trim with stress-free breaks",
-        "Ear flush & skin inspection",
+        "Gentle bathing formulas",
+        "Low-noise handling techniques",
+        "Nail care breaks as needed",
+        "Calm salon atmosphere",
+        "Individualized pet focus",
       ],
     },
   ];
@@ -50,20 +50,18 @@ export default function ServicesSection() {
     <section id="services" className="py-20 bg-warm-ivory">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
         <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
           <span className="px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
-            Personalized Grooming
+            Personalized Pet Grooming
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-stone-900 tracking-tight">
-            A calmer grooming experience for every pet.
+            Attentive care for every dog.
           </h2>
           <p className="text-lg text-stone-600">
-            We tailor every session to your dog's unique breed, coat texture, temperament, and comfort level. Call us to discuss your pet's needs.
+            Call or message Comfort Grooming to discuss your dog's coat type, temperament, and specific grooming options.
           </p>
         </div>
 
-        {/* 3 Editorial Cards Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {services.map((svc, idx) => {
             const Icon = svc.icon;
@@ -93,7 +91,7 @@ export default function ServicesSection() {
 
                   <div className="space-y-3 pt-2">
                     <p className="text-xs font-bold text-stone-400 uppercase tracking-wider">
-                      Includes:
+                      Care Features:
                     </p>
                     <ul className="space-y-2.5">
                       {svc.highlights.map((h, i) => (

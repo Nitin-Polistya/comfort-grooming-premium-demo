@@ -18,7 +18,7 @@ export default function Header() {
               Comfort Grooming
             </span>
             <span className="block text-[11px] font-medium tracking-wider uppercase text-amber-800/80 -mt-0.5">
-              Pinson • Alabama
+              4298 Main St • Pinson, AL
             </span>
           </div>
         </a>
@@ -34,14 +34,14 @@ export default function Header() {
             Care Philosophy
           </a>
           <a href="#location" className="hover:text-amber-800 transition-colors py-2">
-            Location & Hours
+            Contact & Directions
           </a>
         </nav>
 
         <div className="hidden sm:flex items-center gap-4">
-          <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-200/50 border border-stone-300/40 text-xs font-medium text-stone-700">
+          <div className="hidden lg:flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-200/60 border border-stone-300/40 text-xs font-medium text-stone-700">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span>Open Tue–Sat in Pinson</span>
+            <span>Serving Pinson, Alabama</span>
           </div>
 
           <a
@@ -91,7 +91,7 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
               className="py-2 border-b border-stone-200/60 hover:text-amber-800"
             >
-              Location & Hours
+              Contact & Directions
             </a>
           </nav>
 
@@ -104,7 +104,7 @@ export default function Header() {
               <span>Call (205) 623-7991</span>
             </a>
             <a
-              href="https://www.facebook.com/profile.php?id=100063620959419"
+              href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm shadow-sm"
