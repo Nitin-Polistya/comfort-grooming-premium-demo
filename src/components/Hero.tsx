@@ -1,0 +1,93 @@
+"use client";
+
+import React, { useState } from "react";
+import { Phone, MessageSquare, Heart, ShieldCheck, MapPin } from "lucide-react";
+import DogScene from "./3d/DogScene";
+
+export default function Hero() {
+  const [isCtaHovered, setIsCtaHovered] = useState(false);
+
+  return (
+    <section className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24 bg-warm-ivory">
+      {/* Soft background ambient gradient shapes */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-r from-amber-100/40 via-emerald-100/30 to-rose-100/30 blur-3xl rounded-full pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* LEFT CONTENT COLUMN (7 cols) */}
+          <div className="lg:col-span-7 space-y-8 text-left">
+            
+            {/* Eyebrow Pill */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/10 text-amber-900 text-xs font-bold tracking-wider uppercase">
+              <MapPin className="w-3.5 h-3.5 text-amber-800" />
+              <span>Pinson, Alabama • One-on-One Pet Grooming</span>
+            </div>
+
+            {/* Main Editorial Headline */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif text-stone-900 tracking-tight leading-[1.12]">
+              Comfort they can feel. <br />
+              <span className="text-amber-800 italic font-normal">Care you can see.</span>
+            </h1>
+
+            {/* Body Copy */}
+            <p className="text-lg sm:text-xl text-stone-600 max-w-2xl leading-relaxed">
+              Pinson’s dedicated one-on-one pet grooming salon. We provide a calm, low-stress environment where every dog—from playful small breeds to gentle giants—receives patient, individualized attention.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+              <a
+                href="tel:+12056237991"
+                onMouseEnter={() => setIsCtaHovered(true)}
+                onMouseLeave={() => setIsCtaHovered(false)}
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-stone-900 text-white font-semibold text-base hover:bg-amber-800 active:scale-98 transition-all duration-200 shadow-lg shadow-stone-900/15 group"
+              >
+                <Phone className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />
+                <span>Call to Book (+1 205-623-7991)</span>
+              </a>
+
+              <a
+                href="https://www.facebook.com/profile.php?id=100063620959419"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-white border border-stone-300 text-stone-800 font-medium text-base hover:bg-stone-100 hover:border-stone-400 active:scale-98 transition-all shadow-sm"
+              >
+                <MessageSquare className="w-4 h-4 text-blue-600" />
+                <span>Message on Facebook</span>
+              </a>
+            </div>
+
+            {/* Micro Trust Indicators */}
+            <div className="pt-6 border-t border-stone-900/10 grid grid-cols-2 sm:grid-cols-3 gap-4 text-stone-700 text-xs font-semibold">
+              <div className="flex items-center gap-2">
+                <Heart className="w-4 h-4 text-amber-700 shrink-0" />
+                <span>1-on-1 Low Stress</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>All Dog Sizes</span>
+              </div>
+              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
+                <MapPin className="w-4 h-4 text-stone-700 shrink-0" />
+                <span>4289 Main St, Pinson</span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* RIGHT 3D HERO CANVAS COLUMN (5 cols) */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative z-10 bg-gradient-to-b from-stone-100/80 to-amber-50/50 rounded-3xl p-2 border border-stone-200/80 shadow-2xl shadow-stone-900/5">
+              <DogScene isCtaHovered={isCtaHovered} />
+            </div>
+
+            {/* Decorative background aura */}
+            <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-amber-200/40 rounded-full blur-2xl pointer-events-none -z-10" />
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
