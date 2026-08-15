@@ -48,12 +48,12 @@ export default function WhyComfortMatters() {
             </h2>
 
             <p className="text-lg text-stone-600 leading-relaxed">
-              At Comfort Grooming in Pinson, we believe grooming shouldn't be a stressful chore for your pet. We focus on providing attentive, individualized pet grooming in a welcoming salon setting.
+              At Comfort Grooming in Pinson, we believe a thoughtful grooming experience starts with understanding the individual dog. Call or message us directly to discuss your pet's coat and grooming options.
             </p>
 
-            <blockquote className="p-6 rounded-2xl bg-white border-l-4 border-amber-800 shadow-md text-stone-800 italic font-serif text-lg leading-relaxed">
-              "Every pet deserves patient care, gentle handling, and a groomer who truly listens to their needs."
-            </blockquote>
+            <div className="p-6 rounded-2xl bg-white border border-stone-200/80 shadow-md text-stone-800 font-serif text-lg leading-relaxed">
+              Attentive local pet grooming focused on quality coat care and companion dog comfort in a welcoming salon setting.
+            </div>
 
             <div className="pt-2">
               <a

@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { MapPin, PhoneCall, Sparkles } from "lucide-react";
+import { MapPin, PhoneCall, MessageCircle } from "lucide-react";
 
 export default function LocalTrustStrip() {
   return (
@@ -28,12 +28,12 @@ export default function LocalTrustStrip() {
           <div className="hidden md:block w-px h-8 bg-stone-200" />
 
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center shrink-0">
-              <Sparkles className="w-4 h-4" />
+            <div className="w-9 h-9 rounded-xl bg-amber-100/80 text-amber-900 flex items-center justify-center shrink-0">
+              <MessageCircle className="w-4 h-4" />
             </div>
             <div>
-              <span className="block font-bold text-stone-900">Attentive & Individualized</span>
-              <span className="text-stone-500 text-xs">Focused on your dog's unique needs</span>
+              <span className="block font-bold text-stone-900">Grooming Discussion</span>
+              <span className="text-stone-500 text-xs">Talk with Comfort Grooming about your dog's needs</span>
             </div>
           </div>
 

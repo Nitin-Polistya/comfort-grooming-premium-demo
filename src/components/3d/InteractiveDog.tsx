@@ -29,14 +29,14 @@ function DogModel({ isCtaHovered }: { isCtaHovered: boolean }) {
       const hoverLift = isCtaHovered ? 0.12 : 0;
       dogRef.current.position.y = THREE.MathUtils.lerp(
         dogRef.current.position.y,
-        -0.55 + breath + hoverLift,
+        -0.48 + breath + hoverLift,
         delta * 4
       );
     }
   });
 
   return (
-    <group ref={dogRef} position={[0, -0.65, 0]} scale={2.1}>
+    <group ref={dogRef} position={[0, -0.48, 0]} scale={2.05}>
       <primitive object={scene} />
     </group>
   );
@@ -104,7 +104,7 @@ function ProceduralDog({ isCtaHovered }: { isCtaHovered: boolean }) {
 }
 
 export default function InteractiveDog({ isCtaHovered = false }: InteractiveDogProps) {
-  const [useGltfModel, setUseGltfModel] = useState(true);
+  const [useGltfModel] = useState(true);
 
   return (
     <group>
@@ -116,42 +116,12 @@ export default function InteractiveDog({ isCtaHovered = false }: InteractiveDogP
 
       <ContactShadows
         position={[0, -0.9, 0]}
-        opacity={0.45}
-        scale={6.5}
-        blur={2}
-        far={3.2}
+        opacity={0.5}
+        scale={6.0}
+        blur={2.2}
+        far={3.0}
         color="#2B221E"
       />
-
-      <Float speed={2} rotationIntensity={0.5} floatIntensity={1.2}>
-        <mesh position={[-1.45, 1.25, 0.65]}>
-          <sphereGeometry args={[0.17, 24, 24]} />
-          <meshPhysicalMaterial
-            roughness={0.04}
-            transmission={0.95}
-            thickness={0.45}
-            ior={1.3}
-            color="#E0F2FE"
-            transparent
-            opacity={0.85}
-          />
-        </mesh>
-      </Float>
-
-      <Float speed={2.5} rotationIntensity={0.8} floatIntensity={1.5}>
-        <mesh position={[1.55, 0.85, -0.45]}>
-          <sphereGeometry args={[0.23, 24, 24]} />
-          <meshPhysicalMaterial
-            roughness={0.04}
-            transmission={0.95}
-            thickness={0.45}
-            ior={1.3}
-            color="#FCE7F3"
-            transparent
-            opacity={0.82}
-          />
-        </mesh>
-      </Float>
     </group>
   );
 }

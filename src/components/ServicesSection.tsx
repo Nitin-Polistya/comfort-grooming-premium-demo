@@ -34,7 +34,7 @@ export default function ServicesSection() {
           <div className="lg:col-span-6 relative h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-md">
             <Image
               src="/images/poodle_grooming.jpg"
-              alt="Freshly groomed apricot poodle in boutique salon"
+              alt="Groomed companion dog example"
               fill
               className="object-cover hover:scale-105 transition-transform duration-700"
             />
@@ -45,15 +45,15 @@ export default function ServicesSection() {
               Full Care Service
             </span>
             <h3 className="text-3xl font-bold font-serif text-stone-900">
-              Complete Bath & Grooming
+              Complete Grooming
             </h3>
             <p className="text-stone-600 text-base leading-relaxed">
-              A comprehensive grooming appointment structured around your pet's coat and comfort. Includes gentle bathing, thorough hand blow-dry, coat brushing, precision scissor work, and ear care.
+              A grooming appointment structured around your dog's coat, size, and current grooming needs. Call or message the salon to discuss the most appropriate options for your pet.
             </p>
             <div className="pt-2">
               <a
                 href="tel:+12056237991"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-stone-900 text-white font-semibold text-sm hover:bg-amber-800 transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-stone-900 text-white font-semibold text-sm hover:bg-amber-800 transition-colors shadow-sm"
               >
                 <Phone className="w-4 h-4 text-amber-400" />
                 <span>Call to Discuss Your Dog</span>
@@ -75,20 +75,29 @@ export default function ServicesSection() {
               Maintenance & Tidy-Up
             </span>
             <h3 className="text-3xl font-bold font-serif text-stone-900">
-              Companion Maintenance & Touch-Up
+              Bath & Tidy Care
             </h3>
             <p className="text-stone-600 text-base leading-relaxed">
-              Perfect for small companion breeds or dogs needing light maintenance between fuller appointments. Face scissoring, paw pad trimming, deshedding brush out, and coat refreshing.
+              For dogs needing light coat maintenance, bathing, or general tidying between fuller appointments.
             </p>
             <div className="p-4 rounded-xl bg-amber-50/60 border border-amber-200/60 text-xs text-amber-900 leading-relaxed">
-              <strong>Available grooming options may vary.</strong> Call or message Comfort Grooming directly to discuss your pet's needs.
+              <strong>Available grooming services may vary.</strong> Contact Comfort Grooming directly to discuss your dog's needs.
+            </div>
+            <div>
+              <a
+                href="tel:+12056237991"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-stone-300 text-stone-800 font-semibold text-sm hover:bg-stone-100 transition-colors shadow-sm"
+              >
+                <Phone className="w-4 h-4 text-amber-600" />
+                <span>Ask About Available Options</span>
+              </a>
             </div>
           </div>
 
           <div className="lg:col-span-6 relative h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-md order-1 lg:order-2">
             <Image
               src="/images/chihuahua_care.jpg"
-              alt="Cute Chihuahua companion dog resting comfortably"
+              alt="Small companion dog resting comfortably"
               fill
               className="object-cover hover:scale-105 transition-transform duration-700"
             />

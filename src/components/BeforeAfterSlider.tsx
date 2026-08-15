@@ -52,20 +52,20 @@ export default function BeforeAfterSlider() {
           >
             <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-400/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/20">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Grooming Example</span>
+              <span>Grooming Visual Example</span>
             </span>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-tight">
-              From heavy coat to fresh & comfortable.
+              See the visual difference coat care makes.
             </h2>
 
             <p className="text-base sm:text-lg text-stone-300 leading-relaxed">
-              Regular coat care prevents painful matting, keeps skin breathing, and lets your dog move with joyful ease.
+              Regular coat care can help keep your dog's coat cleaner, tidier, and easier to manage between appointments.
             </p>
 
             <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700/60 text-xs text-stone-400 space-y-2">
-              <p className="font-semibold text-amber-300">💡 Visual Demo Example</p>
-              <p>Drag the slider left or right to compare the coat condition before and after grooming.</p>
+              <p className="font-semibold text-amber-300">💡 Illustrative Visual Demo</p>
+              <p>Drag the slider left or right to compare coat condition examples. This illustrative imagery is not presented as a Comfort Grooming client result.</p>
             </div>
           </motion.div>
 

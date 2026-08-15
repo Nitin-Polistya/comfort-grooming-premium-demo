@@ -17,9 +17,11 @@ export default function Header() {
 
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
-      scrolled ? "h-16 glass-header shadow-sm" : "h-22 bg-warm-ivory/90"
+      scrolled ? "glass-header shadow-sm" : "bg-warm-ivory/95"
     }`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between transition-all duration-300 ${
+        scrolled ? "py-3" : "py-5"
+      }`}>
 
         <a href="#" className="flex items-center gap-3 group focus:outline-none rounded-lg p-1">
           <div className="w-10 h-10 rounded-2xl bg-amber-800 text-stone-100 flex items-center justify-center font-bold shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform duration-300">

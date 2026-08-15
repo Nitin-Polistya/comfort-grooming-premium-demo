@@ -43,7 +43,7 @@ export default function DogScene({ isCtaHovered = false }: DogSceneProps) {
     <div className="w-full h-[460px] sm:h-[520px] lg:h-[600px] relative touch-none select-none">
       <Canvas
         shadows
-        camera={{ position: [0, 0.4, 4.8], fov: 45 }}
+        camera={{ position: [0, 0.2, 4.4], fov: 42 }}
         dpr={[1, Math.min(2, typeof window !== "undefined" ? window.devicePixelRatio : 1.5)]}
         style={{ pointerEvents: reducedMotion ? "none" : "auto" }}
       >
