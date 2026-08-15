@@ -1,16 +1,28 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Phone, Menu, X, Sparkles } from "lucide-react";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <header className="sticky top-0 z-50 glass-header border-b border-stone-900/5 transition-all duration-300">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-amber-600/30 rounded-lg p-1">
-          <div className="w-11 h-11 rounded-2xl bg-amber-800 text-stone-100 flex items-center justify-center font-bold shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform duration-300">
+    <header className={`sticky top-0 z-50 transition-all duration-300 ${
+      scrolled ? "h-16 glass-header shadow-sm" : "h-22 bg-warm-ivory/90"
+    }`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full flex items-center justify-between">
+
+        <a href="#" className="flex items-center gap-3 group focus:outline-none rounded-lg p-1">
+          <div className="w-10 h-10 rounded-2xl bg-amber-800 text-stone-100 flex items-center justify-center font-bold shadow-md shadow-amber-900/10 group-hover:scale-105 transition-transform duration-300">
             <Sparkles className="w-5 h-5 text-amber-300" />
           </div>
           <div>
@@ -46,7 +58,7 @@ export default function Header() {
 
           <a
             href="tel:+12056237991"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 text-stone-100 text-sm font-semibold hover:bg-amber-800 active:scale-95 transition-all duration-200 shadow-sm shadow-stone-900/10"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-stone-900 text-stone-100 text-sm font-semibold hover:bg-amber-800 active:scale-95 transition-all duration-200 shadow-sm"
           >
             <Phone className="w-4 h-4 text-amber-400" />
             <span>(205) 623-7991</span>

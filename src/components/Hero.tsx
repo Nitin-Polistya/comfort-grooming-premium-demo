@@ -1,22 +1,33 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Phone, MessageSquare, Heart, ShieldCheck, MapPin } from "lucide-react";
-import DogScene from "./3d/DogScene";
+import dynamic from "next/dynamic";
+
+const DogScene = dynamic(() => import("./3d/DogScene"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-[460px] sm:h-[520px] lg:h-[600px] flex items-center justify-center bg-stone-100/50 rounded-3xl animate-pulse text-stone-400 font-serif">
+      <span>Loading 3D Salon Experience...</span>
+    </div>
+  ),
+});
 
 export default function Hero() {
   const [isCtaHovered, setIsCtaHovered] = useState(false);
 
   return (
     <section className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24 bg-warm-ivory">
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-r from-amber-100/40 via-emerald-100/30 to-rose-100/30 blur-3xl rounded-full pointer-events-none -z-10" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           
-          {/* LEFT CONTENT COLUMN */}
-          <div className="lg:col-span-7 space-y-8 text-left">
-            
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            className="lg:col-span-7 space-y-8 text-left"
+          >
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/10 text-amber-900 text-xs font-bold tracking-wider uppercase">
               <MapPin className="w-3.5 h-3.5 text-amber-800" />
               <span>PINSON, ALABAMA • PET GROOMING</span>
@@ -56,11 +67,11 @@ export default function Hero() {
             <div className="pt-6 border-t border-stone-900/10 grid grid-cols-2 sm:grid-cols-3 gap-4 text-stone-700 text-xs font-semibold">
               <div className="flex items-center gap-2">
                 <Heart className="w-4 h-4 text-amber-700 shrink-0" />
-                <span>Personalized Attention</span>
+                <span>Personalized Care</span>
               </div>
               <div className="flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Gentle Pet Handling</span>
+                <span>Gentle Handling</span>
               </div>
               <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
                 <MapPin className="w-4 h-4 text-stone-700 shrink-0" />
@@ -68,16 +79,20 @@ export default function Hero() {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
-          {/* RIGHT 3D CANVAS */}
-          <div className="lg:col-span-5 relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            className="lg:col-span-5 relative"
+          >
             <div className="relative z-10 bg-gradient-to-b from-stone-100/80 to-amber-50/50 rounded-3xl p-2 border border-stone-200/80 shadow-2xl shadow-stone-900/5">
               <DogScene isCtaHovered={isCtaHovered} />
             </div>
 
             <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-amber-200/40 rounded-full blur-2xl pointer-events-none -z-10" />
-          </div>
+          </motion.div>
 
         </div>
       </div>

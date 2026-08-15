@@ -45,7 +45,7 @@ export default function Footer() {
         <div className="pt-6 border-t border-stone-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-stone-500">
           <p>© {new Date().getFullYear()} Comfort Grooming and Daycare LLC. All rights reserved.</p>
           <p className="flex items-center gap-1">
-            <span>Bespoke 3D Website Demo by</span>
+            <span>Website concept by</span>
             <span className="text-stone-300 font-semibold">Paldren</span>
           </p>
         </div>

@@ -1,62 +1,56 @@
 "use client";
 
 import React from "react";
-import { HeartHandshake, Shield, Sparkles, PhoneCall } from "lucide-react";
+import { motion } from "framer-motion";
+import { MapPin, PhoneCall, Sparkles } from "lucide-react";
 
 export default function LocalTrustStrip() {
-  const pillars = [
-    {
-      icon: HeartHandshake,
-      title: "Local Pinson Groomer",
-      desc: "Dedicated pet care business rooted right here on Main Street in Pinson, Alabama.",
-    },
-    {
-      icon: Shield,
-      title: "Personalized Pet Care",
-      desc: "Attentive handling focused on creating a calm and comfortable environment for your dog.",
-    },
-    {
-      icon: Sparkles,
-      title: "Care for Various Breeds",
-      desc: "Welcoming companion dogs of different sizes, coat types, and grooming needs.",
-    },
-    {
-      icon: PhoneCall,
-      title: "Direct Call or Text",
-      desc: "Reach us directly at (205) 623-7991 to discuss your pet and schedule an appointment.",
-    },
-  ];
-
   return (
-    <section className="py-12 bg-white border-y border-stone-200/60">
+    <section className="py-8 bg-white border-y border-stone-200/70 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8">
-          <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
-            Local Care in Pinson, Alabama
-          </span>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col md:flex-row items-center justify-between gap-6 text-stone-800 text-sm font-medium text-center md:text-left"
+        >
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center shrink-0">
+              <MapPin className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="block font-bold text-stone-900">Local Grooming Salon</span>
+              <span className="text-stone-500 text-xs">4298 Main St, Pinson, AL 35126</span>
+            </div>
+          </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {pillars.map((p, idx) => {
-            const Icon = p.icon;
-            return (
-              <div
-                key={idx}
-                className="p-6 rounded-2xl bg-stone-50 border border-stone-200/60 hover:border-amber-700/30 hover:bg-amber-50/30 transition-all duration-300 group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-amber-800 group-hover:text-white transition-all duration-300">
-                  <Icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold font-serif text-stone-900 mb-2">
-                  {p.title}
-                </h3>
-                <p className="text-sm text-stone-600 leading-relaxed">
-                  {p.desc}
-                </p>
-              </div>
-            );
-          })}
-        </div>
+          <div className="hidden md:block w-px h-8 bg-stone-200" />
+
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center shrink-0">
+              <Sparkles className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="block font-bold text-stone-900">Attentive & Individualized</span>
+              <span className="text-stone-500 text-xs">Focused on your dog's unique needs</span>
+            </div>
+          </div>
+
+          <div className="hidden md:block w-px h-8 bg-stone-200" />
+
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center shrink-0">
+              <PhoneCall className="w-4 h-4" />
+            </div>
+            <div>
+              <span className="block font-bold text-stone-900">Direct Contact & Scheduling</span>
+              <a href="tel:+12056237991" className="text-amber-800 font-bold hover:underline text-xs">
+                Call or Text (205) 623-7991
+              </a>
+            </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

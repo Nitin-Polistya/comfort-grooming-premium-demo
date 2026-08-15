@@ -7,9 +7,7 @@
   --text-primary: #1C1917;
   --text-muted: #68625D;
   --accent-sage: #4E6E5D;
-  --accent-sage-light: #EBF2EE;
   --accent-terracotta: #C8654B;
-  --accent-terracotta-light: #FBF0ED;
   --accent-warm-gold: #D99B26;
   --border-subtle: rgba(28, 25, 23, 0.08);
 }
@@ -17,6 +15,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
     background-color: var(--bg-primary);
     color: var(--text-primary);
     font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
@@ -27,6 +26,10 @@
   body {
     background-color: var(--bg-primary);
     overflow-x: hidden;
+  }
+
+  section[id] {
+    scroll-margin-top: 90px;
   }
 }
 
@@ -42,49 +45,27 @@
   background-color: #F4EFEA;
 }
 
-.bg-sage-tint {
-  background-color: #F0F4F2;
-}
-
 .text-espresso {
   color: #1C1917;
 }
 
-.text-sage {
-  color: #4E6E5D;
-}
-
-.text-terracotta {
-  color: #C8654B;
-}
-
-.border-warm {
-  border-color: rgba(28, 25, 23, 0.08);
-}
-
 /* Glassmorphism */
 .glass-header {
-  background: rgba(250, 247, 242, 0.82);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(250, 247, 242, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(28, 25, 23, 0.06);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 10px 30px -5px rgba(28, 25, 23, 0.04);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 40px -10px rgba(28, 25, 23, 0.05);
 }
 
-.glass-pill {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(28, 25, 23, 0.08);
-}
-
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -97,23 +78,4 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #B8B0A5;
-}
-
-/* Interactive animations */
-@keyframes floatSlow {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-8px) rotate(1deg); }
-}
-
-.animate-float {
-  animation: floatSlow 6s ease-in-out infinite;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.7; transform: scale(1.05); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s ease-in-out infinite;
 }

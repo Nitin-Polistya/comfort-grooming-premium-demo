@@ -1,121 +1,99 @@
 "use client";
 
 import React from "react";
-import { Sparkles, Scissors, Bath, Check } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Sparkles, Phone } from "lucide-react";
 
 export default function ServicesSection() {
-  const services = [
-    {
-      badge: "Full Service",
-      title: "Bath & Complete Grooming",
-      icon: Sparkles,
-      desc: "Thorough coat bath, drying, coat brushing, and overall pet care tailored to your dog.",
-      highlights: [
-        "Soothing coat bath & gentle drying",
-        "Thorough coat brush out",
-        "Neat scissor styling trim",
-        "Clean ear inspection",
-        "Nail trim care",
-      ],
-    },
-    {
-      badge: "Maintenance",
-      title: "Tidy-Up & Scissoring",
-      icon: Scissors,
-      desc: "Great for keeping face, paws, and coat neat and manageable between full appointments.",
-      highlights: [
-        "Face & eye area scissor touch-up",
-        "Paw & pad cleanup",
-        "Deshedding coat brush out",
-        "Sanitary trim care",
-        "Refreshing finish",
-      ],
-    },
-    {
-      badge: "Gentle Care",
-      title: "Attentive Care Session",
-      icon: Bath,
-      desc: "Personalized attention tailored for pets needing extra patience, reassurance, or soft handling.",
-      highlights: [
-        "Gentle bathing formulas",
-        "Low-noise handling techniques",
-        "Nail care breaks as needed",
-        "Calm salon atmosphere",
-        "Individualized pet focus",
-      ],
-    },
-  ];
-
   return (
-    <section id="services" className="py-20 bg-warm-ivory">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-24 bg-warm-ivory">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
         
-        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16">
+        {/* Section Header */}
+        <div className="max-w-3xl mx-auto text-center space-y-4">
           <span className="px-3.5 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold uppercase tracking-wider">
-            Personalized Pet Grooming
+            Grooming & Pet Care
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-stone-900 tracking-tight">
-            Attentive care for every dog.
+            Tailored care for every coat & character.
           </h2>
           <p className="text-lg text-stone-600">
-            Call or message Comfort Grooming to discuss your dog's coat type, temperament, and specific grooming options.
+            We adapt every session to your pet's size, coat condition, and individual temperament.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {services.map((svc, idx) => {
-            const Icon = svc.icon;
-            return (
-              <div
-                key={idx}
-                className="bg-white rounded-3xl p-8 border border-stone-200/80 shadow-lg shadow-stone-900/5 flex flex-col justify-between hover:shadow-xl hover:border-amber-800/20 transition-all duration-300"
+        {/* Feature 1: Full Grooming (Asymmetric Photo Left) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-white rounded-3xl p-8 lg:p-12 border border-stone-200/80 shadow-xl"
+        >
+          <div className="lg:col-span-6 relative h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-md">
+            <Image
+              src="/images/poodle_grooming.jpg"
+              alt="Freshly groomed apricot poodle in boutique salon"
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+
+          <div className="lg:col-span-6 space-y-6">
+            <span className="px-3 py-1 rounded-full bg-stone-100 text-stone-700 text-xs font-bold uppercase">
+              Full Care Service
+            </span>
+            <h3 className="text-3xl font-bold font-serif text-stone-900">
+              Complete Bath & Grooming
+            </h3>
+            <p className="text-stone-600 text-base leading-relaxed">
+              A comprehensive grooming appointment structured around your pet's coat and comfort. Includes gentle bathing, thorough hand blow-dry, coat brushing, precision scissor work, and ear care.
+            </p>
+            <div className="pt-2">
+              <a
+                href="tel:+12056237991"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-stone-900 text-white font-semibold text-sm hover:bg-amber-800 transition-colors"
               >
-                <div className="space-y-6">
-                  <div className="flex items-center justify-between">
-                    <span className="px-3 py-1 rounded-full bg-stone-100 text-stone-700 text-xs font-bold tracking-wide">
-                      {svc.badge}
-                    </span>
-                    <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-800 flex items-center justify-center">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                  </div>
+                <Phone className="w-4 h-4 text-amber-400" />
+                <span>Call to Discuss Your Dog</span>
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
-                  <div>
-                    <h3 className="text-2xl font-bold font-serif text-stone-900 mb-3">
-                      {svc.title}
-                    </h3>
-                    <p className="text-sm text-stone-600 leading-relaxed">
-                      {svc.desc}
-                    </p>
-                  </div>
+        {/* Feature 2: Tidy-Up & Companion Care (Asymmetric Photo Right) */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center bg-white rounded-3xl p-8 lg:p-12 border border-stone-200/80 shadow-xl"
+        >
+          <div className="lg:col-span-6 space-y-6 order-2 lg:order-1">
+            <span className="px-3 py-1 rounded-full bg-stone-100 text-stone-700 text-xs font-bold uppercase">
+              Maintenance & Tidy-Up
+            </span>
+            <h3 className="text-3xl font-bold font-serif text-stone-900">
+              Companion Maintenance & Touch-Up
+            </h3>
+            <p className="text-stone-600 text-base leading-relaxed">
+              Perfect for small companion breeds or dogs needing light maintenance between fuller appointments. Face scissoring, paw pad trimming, deshedding brush out, and coat refreshing.
+            </p>
+            <div className="p-4 rounded-xl bg-amber-50/60 border border-amber-200/60 text-xs text-amber-900 leading-relaxed">
+              <strong>Available grooming options may vary.</strong> Call or message Comfort Grooming directly to discuss your pet's needs.
+            </div>
+          </div>
 
-                  <div className="space-y-3 pt-2">
-                    <p className="text-xs font-bold text-stone-400 uppercase tracking-wider">
-                      Care Features:
-                    </p>
-                    <ul className="space-y-2.5">
-                      {svc.highlights.map((h, i) => (
-                        <li key={i} className="flex items-start gap-2.5 text-sm text-stone-700">
-                          <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="pt-8 mt-8 border-t border-stone-100">
-                  <a
-                    href="tel:+12056237991"
-                    className="w-full inline-flex items-center justify-center py-3 px-4 rounded-xl bg-stone-100 text-stone-900 font-semibold text-sm hover:bg-amber-800 hover:text-white transition-colors"
-                  >
-                    Call to Discuss Your Dog
-                  </a>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+          <div className="lg:col-span-6 relative h-[360px] sm:h-[420px] rounded-2xl overflow-hidden shadow-md order-1 lg:order-2">
+            <Image
+              src="/images/chihuahua_care.jpg"
+              alt="Cute Chihuahua companion dog resting comfortably"
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+        </motion.div>
 
       </div>
     </section>

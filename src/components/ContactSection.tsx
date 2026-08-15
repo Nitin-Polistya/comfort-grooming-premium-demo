@@ -1,11 +1,12 @@
 "use client";
 
 import React from "react";
+import { motion } from "framer-motion";
 import { Phone, MapPin, MessageSquare, Navigation } from "lucide-react";
 
 export default function ContactSection() {
   return (
-    <section id="location" className="py-20 bg-stone-900 text-stone-100">
+    <section id="location" className="py-24 bg-stone-950 text-stone-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
@@ -20,11 +21,17 @@ export default function ContactSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           
-          <div className="lg:col-span-6 bg-stone-800/90 rounded-3xl p-8 border border-stone-700/80 space-y-8 shadow-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="lg:col-span-6 bg-stone-900 rounded-3xl p-8 lg:p-10 border border-stone-800 space-y-8 shadow-2xl flex flex-col justify-between"
+          >
             <div>
-              <h3 className="text-2xl font-bold font-serif text-white mb-2">
+              <h3 className="text-3xl font-bold font-serif text-white mb-2">
                 Comfort Grooming
               </h3>
               <p className="text-xs font-bold uppercase tracking-widest text-amber-400">
@@ -32,31 +39,37 @@ export default function ContactSection() {
               </p>
             </div>
 
-            <div className="space-y-4 text-stone-200">
-              <div className="flex items-start gap-3.5">
-                <MapPin className="w-5 h-5 text-amber-400 shrink-0 mt-1" />
+            <div className="space-y-6 text-stone-200">
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <MapPin className="w-5 h-5" />
+                </div>
                 <div>
-                  <p className="font-semibold text-white">Salon Address</p>
-                  <p className="text-stone-300">4298 Main St</p>
-                  <p className="text-stone-300">Pinson, AL 35126</p>
+                  <p className="font-semibold text-white text-base">Salon Address</p>
+                  <p className="text-stone-300 text-lg font-medium">4298 Main St</p>
+                  <p className="text-stone-400">Pinson, AL 35126</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3.5 pt-2">
-                <Phone className="w-5 h-5 text-amber-400 shrink-0 mt-1" />
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <Phone className="w-5 h-5" />
+                </div>
                 <div>
-                  <p className="font-semibold text-white">Phone & Text</p>
-                  <a href="tel:+12056237991" className="text-amber-300 font-bold hover:underline text-lg">
+                  <p className="font-semibold text-white text-base">Phone & Text</p>
+                  <a href="tel:+12056237991" className="text-amber-300 font-bold hover:underline text-xl">
                     +1 (205) 623-7991
                   </a>
-                  <p className="text-xs text-stone-400">Call or send a text message</p>
+                  <p className="text-xs text-stone-400 mt-0.5">Call or send a text message</p>
                 </div>
               </div>
 
-              <div className="flex items-start gap-3.5 pt-2">
-                <MessageSquare className="w-5 h-5 text-blue-400 shrink-0 mt-1" />
+              <div className="flex items-start gap-4">
+                <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
                 <div>
-                  <p className="font-semibold text-white">Facebook Page</p>
+                  <p className="font-semibold text-white text-base">Facebook Page</p>
                   <a
                     href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
                     target="_blank"
@@ -75,41 +88,57 @@ export default function ContactSection() {
                 className="w-full flex items-center justify-center gap-2 py-4 rounded-xl bg-amber-500 text-stone-950 font-bold text-base hover:bg-amber-400 transition-colors shadow-lg"
               >
                 <Phone className="w-5 h-5" />
-                <span>Call (205) 623-7991</span>
+                <span>Call Comfort Grooming</span>
+              </a>
+
+              <a
+                href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-blue-600 text-white font-semibold text-sm hover:bg-blue-500 transition-colors"
+              >
+                <MessageSquare className="w-4 h-4" />
+                <span>Message on Facebook</span>
               </a>
 
               <a
                 href="https://maps.google.com/?q=4298+Main+St,+Pinson,+AL+35126"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-stone-700 text-stone-100 font-medium text-sm hover:bg-stone-600 transition-colors"
+                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-stone-800 text-stone-200 font-medium text-sm hover:bg-stone-700 transition-colors"
               >
                 <Navigation className="w-4 h-4 text-amber-300" />
                 <span>Get Directions (Google Maps)</span>
               </a>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="lg:col-span-6 bg-stone-800/90 rounded-3xl p-8 border border-stone-700/80 space-y-6 shadow-xl text-center flex flex-col justify-between h-full">
-            <div className="space-y-4">
-              <div className="w-16 h-16 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center mx-auto text-3xl font-bold">
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="lg:col-span-6 bg-stone-900 rounded-3xl p-8 lg:p-10 border border-stone-800 flex flex-col justify-between shadow-2xl"
+          >
+            <div className="space-y-6">
+              <div className="w-16 h-16 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-3xl font-bold">
                 📍
               </div>
-              <h3 className="text-2xl font-bold font-serif text-white">
-                Located in Pinson, AL
+              <h3 className="text-3xl font-bold font-serif text-white">
+                Located on Main Street
               </h3>
-              <p className="text-stone-300 text-sm max-w-md mx-auto leading-relaxed">
-                Comfort Grooming is conveniently located at <strong className="text-white">4298 Main St, Pinson, AL 35126</strong>.
+              <p className="text-stone-300 text-base leading-relaxed">
+                Comfort Grooming is located at <strong className="text-white">4298 Main St, Pinson, AL 35126</strong>.
               </p>
             </div>
 
-            <div className="p-6 rounded-2xl bg-stone-900/90 border border-stone-700 text-left space-y-3">
-              <p className="text-amber-300 font-semibold text-sm">📅 How to Schedule</p>
+            <div className="p-6 rounded-2xl bg-stone-950 border border-stone-800 space-y-3 mt-8">
+              <p className="text-amber-300 font-semibold text-sm">📅 How to Book Your Appointment</p>
               <p className="text-xs text-stone-300 leading-relaxed">
-                Please call or text us at <strong className="text-white">+1 (205) 623-7991</strong> or send a message on Facebook to discuss your dog's needs and arrange a grooming time.
+                Call or text us directly at <strong className="text-white">+1 (205) 623-7991</strong> or send a message on Facebook to discuss your dog's coat and schedule a convenient grooming time.
               </p>
             </div>
-          </div>
+          </motion.div>
 
         </div>
 
