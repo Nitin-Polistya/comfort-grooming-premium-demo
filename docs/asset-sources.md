@@ -4,14 +4,11 @@ This document records the provenance, licensing, and usage terms for all 3D mode
 
 ---
 
-## 1. 3D Model Assets
+## 1. Character Assets (2.5D System)
 
-| Asset Name | Local Path | Source / Creator | License | Commercial Usage | Usage in Demo |
+| Asset Name | Local Path | Source / Tool | Date | Usage Terms & Provenance | Usage in Demo |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Shiba Companion Dog** | `/public/models/dog.glb` | [ThreejsShibadoganimation Repo](https://github.com/hana67277/ThreejsShibadoganimation) (Original model by Victory design / Vazxmv) | **CC-BY 4.0** (Creative Commons Attribution 4.0 International) | ✅ Permitted with attribution | 3D Hero mascot model in interactive canvas scene |
-
-### Attribution Notice:
-The 3D Shiba Inu model used in the Hero canvas is created under the Creative Commons Attribution 4.0 International License (CC-BY 4.0).
+| **Apricot Teddy Doodle** | `/public/images/character-master.png`, `character-desktop.webp`, `character-mobile.webp` | Generated specifically for this project using Google Antigravity Image Generator | August 2026 | Usage subject to the applicable generation terms of the tool service. Master high-resolution 2048x2048 PNG with clean fur alpha channel. | Scene 1 Hero mascot & 2.5D scrollytelling anchor |
 
 ---
 

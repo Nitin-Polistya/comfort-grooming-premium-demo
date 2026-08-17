@@ -1,111 +1,159 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Phone, MessageSquare, Heart, ShieldCheck, MapPin } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const DogScene = dynamic(() => import("./3d/DogScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[460px] sm:h-[520px] lg:h-[600px] flex items-center justify-center bg-stone-100/50 rounded-3xl animate-pulse text-stone-400 font-serif">
-      <span>Loading 3D Salon Experience...</span>
-    </div>
-  ),
-});
+import React, { useRef } from "react";
+import Image from "next/image";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion } from "framer-motion";
+import { Phone, MessageSquare, MapPin } from "lucide-react";
 
 export default function Hero() {
-  const [isCtaHovered, setIsCtaHovered] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
 
+  // Scroll handoff setup (Scene 1 -> Scene 2)
   const { scrollYProgress } = useScroll({
-    target: heroRef,
+    target: containerRef,
     offset: ["start start", "end start"],
   });
 
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -35]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.9, 0.65]);
-  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
-  const sceneY = useTransform(scrollYProgress, [0, 1], [0, -18]);
+  const rearTextY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const rearTextOpacity = useTransform(scrollYProgress, [0, 0.7], [0.92, 0.15]);
+  const mascotY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const mascotScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+
+  // Pointer depth interaction (desktop only, subtle)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 120 };
+  const mascotRotateX = useSpring(useTransform(mouseY, [-300, 300], [1.5, -1.5]), springConfig);
+  const mascotRotateY = useSpring(useTransform(mouseX, [-400, 400], [-1.5, 1.5]), springConfig);
+  const mascotTranslateX = useSpring(useTransform(mouseX, [-400, 400], [-8, 8]), springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion || window.innerWidth < 768) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set(e.clientX - centerX);
+    mouseY.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   return (
-    <section ref={heroRef} className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24 bg-warm-ivory">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-h-[92vh] sm:min-h-screen bg-[#F9F6F0] text-slate-900 overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-12"
+    >
+      {/* Background Soft Ambient Lighting */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-[20%] left-[20%] w-[600px] h-[600px] bg-amber-200/25 rounded-full blur-3xl" />
+        <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] bg-amber-300/15 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+        
+        {/* Factual Subheader Location Badge */}
+        <div className="relative z-30 flex items-center gap-2 mb-4 sm:mb-6">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/15 text-amber-900 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
+            <MapPin className="w-3.5 h-3.5 text-amber-700" />
+            <span>4298 MAIN ST • PINSON, AL</span>
+          </div>
+        </div>
+
+        {/* Art-Directed 3-Layer Interlocking Editorial Composition */}
+        <div className="relative min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] flex flex-col sm:flex-row items-center sm:items-center">
           
+          {/* Layer 1 (z-10): Rear Massive Editorial Typography */}
           <motion.div
-            style={{ y: textY, opacity: textOpacity }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="lg:col-span-7 space-y-8 text-left"
+            style={{
+              y: shouldReduceMotion ? 0 : rearTextY,
+              opacity: shouldReduceMotion ? 0.92 : rearTextOpacity,
+            }}
+            className="absolute inset-x-0 top-0 sm:top-0 z-10 select-none pointer-events-none"
           >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/10 text-amber-900 text-xs font-bold tracking-wider uppercase">
-              <MapPin className="w-3.5 h-3.5 text-amber-800" />
-              <span>PINSON, ALABAMA • PET GROOMING</span>
+            <h1 className="font-serif tracking-tight text-amber-950 text-[14vw] sm:text-[11vw] lg:text-[9.5rem] font-bold leading-[0.82] uppercase text-left">
+              Comfort
+            </h1>
+            <div className="font-serif tracking-tight text-amber-950/80 text-[13vw] sm:text-[10vw] lg:text-[8.5rem] font-medium leading-[0.85] uppercase text-left pl-[4vw] sm:pl-[8vw]">
+              Grooming
+            </div>
+          </motion.div>
+
+          {/* Layer 2 (z-20): Candidate B Apricot Doodle Character */}
+          <motion.div
+            style={{
+              y: shouldReduceMotion ? 0 : mascotY,
+              scale: shouldReduceMotion ? 1 : mascotScale,
+              rotateX: shouldReduceMotion ? 0 : mascotRotateX,
+              rotateY: shouldReduceMotion ? 0 : mascotRotateY,
+              x: shouldReduceMotion ? 0 : mascotTranslateX,
+            }}
+            className="relative sm:absolute right-0 sm:right-[2%] lg:right-[6%] top-0 sm:top-[2%] z-20 w-[260px] sm:w-[440px] lg:w-[560px] h-[320px] sm:h-[520px] lg:h-[640px] pointer-events-none flex items-center justify-center my-4 sm:my-0 transition-transform duration-100 ease-out"
+          >
+            {/* Dynamic Radial Contact Shadow beneath Paws */}
+            <div className="absolute bottom-[2%] left-[18%] right-[18%] h-[28px] sm:h-[32px] bg-amber-950/25 rounded-[100%] blur-md scale-y-50 translate-y-2 z-15" />
+            
+            {/* Transparent Master Character */}
+            <div className="relative w-full h-full">
+              <Image
+                src="/images/character-hero.webp"
+                alt="Comfort Grooming Mascot"
+                fill
+                className="object-contain drop-shadow-xl"
+                priority
+                unoptimized
+              />
+            </div>
+          </motion.div>
+
+          {/* Layer 3 (z-30): Foreground Editorial Accent Typography & Copy */}
+          <div className="relative z-30 max-w-xl lg:max-w-2xl pt-2 sm:pt-40 lg:pt-44 space-y-5 sm:space-y-6">
+            <div className="space-y-3">
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif text-amber-900 italic font-normal tracking-tight leading-[1.08] drop-shadow-sm">
+                Care you can see.
+                <br />
+                <span className="text-slate-900 not-italic font-sans font-light text-2xl sm:text-4xl block pt-1.5">
+                  Comfort they can feel.
+                </span>
+              </h2>
+              <p className="text-slate-700 text-base sm:text-lg max-w-md leading-relaxed pt-1">
+                Local dog grooming in Pinson, Alabama. Call or message Comfort Grooming to discuss currently available grooming options for your dog.
+              </p>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif text-stone-900 tracking-tight leading-[1.12]">
-              Comfort they can feel. <br />
-              <span className="text-amber-800 italic font-normal">Care you can see.</span>
-            </h1>
-
-            <p className="text-lg sm:text-xl text-stone-600 max-w-2xl leading-relaxed">
-              Attentive local pet grooming in Pinson, Alabama. We provide individualized care tailored to your dog's specific coat and needs. Call or message us directly to discuss the right grooming option for your pet.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+            {/* High-Contrast Action CTAs */}
+            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4">
               <a
                 href="tel:+12056237991"
-                onMouseEnter={() => setIsCtaHovered(true)}
-                onMouseLeave={() => setIsCtaHovered(false)}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-stone-900 text-white font-semibold text-base hover:bg-amber-800 active:scale-98 transition-all duration-200 shadow-lg shadow-stone-900/15 group"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-amber-900 hover:bg-amber-950 text-amber-50 rounded-full font-medium text-base shadow-lg shadow-amber-950/15 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
-                <Phone className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />
-                <span>Call to Book (+1 205-623-7991)</span>
+                <Phone className="w-5 h-5 text-amber-300" />
+                <span>Call Comfort Grooming</span>
               </a>
 
               <a
                 href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-white border border-stone-300 text-stone-800 font-medium text-base hover:bg-stone-100 hover:border-stone-400 active:scale-98 transition-all shadow-sm"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-white/80 hover:bg-white text-slate-800 border border-slate-300/80 rounded-full font-medium text-base shadow-sm transition-all"
               >
-                <MessageSquare className="w-4 h-4 text-blue-600" />
+                <MessageSquare className="w-5 h-5 text-amber-700" />
                 <span>Message on Facebook</span>
               </a>
             </div>
 
-            <div className="pt-6 border-t border-stone-900/10 grid grid-cols-2 sm:grid-cols-3 gap-4 text-stone-700 text-xs font-semibold">
-              <div className="flex items-center gap-2">
-                <Heart className="w-4 h-4 text-amber-700 shrink-0" />
-                <span>Local Pinson Salon</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Individualized Care</span>
-              </div>
-              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
-                <MapPin className="w-4 h-4 text-stone-700 shrink-0" />
-                <span>4298 Main St, Pinson</span>
-              </div>
+            {/* Address bar footnote */}
+            <div className="pt-1 flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
+              <MapPin className="w-4 h-4 text-amber-700 flex-shrink-0" />
+              <span>4298 Main St, Pinson, AL 35126</span>
             </div>
-
-          </motion.div>
-
-          <motion.div
-            style={{ scale: sceneScale, y: sceneY }}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="relative z-10 bg-gradient-to-b from-stone-100/90 via-amber-50/40 to-stone-100/80 rounded-3xl p-2 border border-stone-200/80 shadow-2xl shadow-stone-900/5">
-              <DogScene isCtaHovered={isCtaHovered} />
-            </div>
-
-            <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-amber-200/30 rounded-full blur-2xl pointer-events-none -z-10" />
-          </motion.div>
+          </div>
 
         </div>
       </div>

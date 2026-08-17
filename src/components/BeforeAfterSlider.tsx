@@ -3,7 +3,7 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Sparkles, MoveHorizontal } from "lucide-react";
+import { Sparkles, MoveHorizontal, Info } from "lucide-react";
 
 export default function BeforeAfterSlider() {
   const [sliderPos, setSliderPos] = useState(50);
@@ -38,7 +38,7 @@ export default function BeforeAfterSlider() {
   };
 
   return (
-    <section id="transformation" className="py-24 bg-stone-900 text-stone-100 overflow-hidden">
+    <section id="transformation" className="py-24 bg-[#0F0D0B] text-slate-100 overflow-hidden border-t border-stone-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
@@ -50,22 +50,25 @@ export default function BeforeAfterSlider() {
             transition={{ duration: 0.7 }}
             className="lg:col-span-5 space-y-6"
           >
-            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-400/10 text-amber-300 text-xs font-bold uppercase tracking-wider border border-amber-400/20">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-amber-400/10 text-amber-300 text-xs font-semibold uppercase tracking-wider border border-amber-400/20">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>Grooming Visual Example</span>
+              <span>Coat Care Transformation</span>
             </span>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-serif text-white tracking-tight leading-tight">
-              See the visual difference coat care makes.
+              See the visual difference coat care can make.
             </h2>
 
-            <p className="text-base sm:text-lg text-stone-300 leading-relaxed">
-              Regular coat care can help keep your dog's coat cleaner, tidier, and easier to manage between appointments.
+            <p className="text-base sm:text-lg text-slate-300 leading-relaxed">
+              Regular bathing, brush-outs, and coat tidying keep companion dogs comfortable, clean, and well-maintained.
             </p>
 
-            <div className="p-4 rounded-2xl bg-stone-800/80 border border-stone-700/60 text-xs text-stone-400 space-y-2">
-              <p className="font-semibold text-amber-300">💡 Illustrative Visual Demo</p>
-              <p>Drag the slider left or right to compare coat condition examples. This illustrative imagery is not presented as a Comfort Grooming client result.</p>
+            <div className="p-4 rounded-2xl bg-stone-900/90 border border-stone-800 text-xs text-slate-400 space-y-2 flex items-start gap-2.5">
+              <Info className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-semibold text-amber-300">Illustrative Example</p>
+                <p className="mt-0.5">Illustrative grooming imagery showing differences in coat appearance. These images are not presented as Comfort Grooming customer results.</p>
+              </div>
             </div>
           </motion.div>
 
@@ -83,18 +86,18 @@ export default function BeforeAfterSlider() {
               onMouseLeave={handleMouseUp}
               onMouseMove={handleMouseMove}
               onTouchMove={handleTouchMove}
-              className="relative w-full h-[400px] sm:h-[480px] rounded-3xl overflow-hidden select-none cursor-ew-resize border border-stone-700 shadow-2xl"
+              className="relative w-full h-[400px] sm:h-[480px] rounded-3xl overflow-hidden select-none cursor-ew-resize border border-stone-800 shadow-2xl"
             >
               {/* AFTER IMAGE (Base Layer) */}
               <div className="absolute inset-0">
                 <Image
                   src="/images/after_groom.jpg"
-                  alt="After grooming - freshly washed and trimmed Goldendoodle"
+                  alt="After coat tidying example"
                   fill
                   className="object-cover"
                 />
                 <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-emerald-900/90 backdrop-blur-md text-emerald-200 text-xs font-bold tracking-wider shadow-md">
-                  AFTER GROOMING
+                  AFTER COAT CARE
                 </div>
               </div>
 
@@ -105,12 +108,12 @@ export default function BeforeAfterSlider() {
               >
                 <Image
                   src="/images/before_groom.jpg"
-                  alt="Before grooming - overgrown fur coat"
+                  alt="Before coat tidying example"
                   fill
                   className="object-cover"
                 />
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-stone-950/90 backdrop-blur-md text-stone-200 text-xs font-bold tracking-wider shadow-md">
-                  BEFORE GROOMING
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-slate-950/90 backdrop-blur-md text-slate-200 text-xs font-bold tracking-wider shadow-md">
+                  BEFORE COAT CARE
                 </div>
               </div>
 
@@ -119,8 +122,8 @@ export default function BeforeAfterSlider() {
                 className="absolute top-0 bottom-0 w-1 bg-white shadow-[0_0_15px_rgba(255,255,255,0.9)] cursor-ew-resize"
                 style={{ left: `${sliderPos}%` }}
               >
-                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-white text-stone-900 shadow-2xl flex items-center justify-center font-bold">
-                  <MoveHorizontal className="w-5 h-5 text-stone-900" />
+                <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-11 h-11 rounded-full bg-white text-slate-900 shadow-2xl flex items-center justify-center font-bold">
+                  <MoveHorizontal className="w-5 h-5 text-slate-900" />
                 </div>
               </div>
 
