@@ -1,12 +1,55 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import { Phone, MessageSquare, MapPin, Sparkles, Star } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion } from "framer-motion";
+import { Phone, MessageSquare, MapPin } from "lucide-react";
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  // Scroll handoff setup (Scene 1 -> Scene 2)
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"],
+  });
+
+  const rearTextY = useTransform(scrollYProgress, [0, 1], [0, -60]);
+  const rearTextOpacity = useTransform(scrollYProgress, [0, 0.7], [0.92, 0.15]);
+  const mascotY = useTransform(scrollYProgress, [0, 1], [0, 40]);
+  const mascotScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
+
+  // Pointer depth interaction (desktop only, subtle)
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 120 };
+  const mascotRotateX = useSpring(useTransform(mouseY, [-300, 300], [1.5, -1.5]), springConfig);
+  const mascotRotateY = useSpring(useTransform(mouseX, [-400, 400], [-1.5, 1.5]), springConfig);
+  const mascotTranslateX = useSpring(useTransform(mouseX, [-400, 400], [-8, 8]), springConfig);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (shouldReduceMotion || window.innerWidth < 768) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    mouseX.set(e.clientX - centerX);
+    mouseY.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   return (
-    <section className="relative min-h-[92vh] sm:min-h-screen bg-[#F9F6F0] text-slate-900 overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 pb-12">
+    <section
+      ref={containerRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-h-[92vh] sm:min-h-screen bg-[#F9F6F0] text-slate-900 overflow-hidden flex flex-col justify-between pt-20 sm:pt-24 pb-12"
+    >
       {/* Background Soft Ambient Lighting */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute -top-[20%] left-[20%] w-[600px] h-[600px] bg-amber-200/25 rounded-full blur-3xl" />
@@ -15,15 +58,11 @@ export default function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
         
-        {/* Top Editorial Subheader Badges */}
-        <div className="relative z-30 flex flex-wrap items-center gap-3 mb-4 sm:mb-8">
+        {/* Factual Subheader Location Badge */}
+        <div className="relative z-30 flex items-center gap-2 mb-4 sm:mb-6">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/15 text-amber-900 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
-            <span>Pinson, AL’s Premier Pet Studio</span>
-          </div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-900/15 text-emerald-800 text-xs font-medium">
-            <Star className="w-3.5 h-3.5 fill-emerald-600 text-emerald-600" />
-            <span>4.9 Star Rated • Gentle & Stress-Free</span>
+            <MapPin className="w-3.5 h-3.5 text-amber-700" />
+            <span>4298 MAIN ST • PINSON, AL</span>
           </div>
         </div>
 
@@ -31,19 +70,32 @@ export default function Hero() {
         <div className="relative min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] flex flex-col sm:flex-row items-center sm:items-center">
           
           {/* Layer 1 (z-10): Rear Massive Editorial Typography */}
-          <div className="absolute inset-x-0 top-0 sm:top-0 z-10 select-none pointer-events-none">
-            <h1 className="font-serif tracking-tight text-amber-950 text-[14vw] sm:text-[11vw] lg:text-[9.5rem] font-bold leading-[0.82] uppercase text-left opacity-[0.92]">
+          <motion.div
+            style={{
+              y: shouldReduceMotion ? 0 : rearTextY,
+              opacity: shouldReduceMotion ? 0.92 : rearTextOpacity,
+            }}
+            className="absolute inset-x-0 top-0 sm:top-0 z-10 select-none pointer-events-none"
+          >
+            <h1 className="font-serif tracking-tight text-amber-950 text-[14vw] sm:text-[11vw] lg:text-[9.5rem] font-bold leading-[0.82] uppercase text-left">
               Comfort
             </h1>
             <div className="font-serif tracking-tight text-amber-950/80 text-[13vw] sm:text-[10vw] lg:text-[8.5rem] font-medium leading-[0.85] uppercase text-left pl-[4vw] sm:pl-[8vw]">
               Grooming
             </div>
-          </div>
+          </motion.div>
 
           {/* Layer 2 (z-20): Candidate B Apricot Doodle Character */}
-          {/* Desktop & Tablet: Central-Right positioning overlapping rear text */}
-          {/* Mobile: Centered responsive mascot below title */}
-          <div className="relative sm:absolute right-0 sm:right-[2%] lg:right-[6%] top-0 sm:top-[2%] z-20 w-[260px] sm:w-[440px] lg:w-[560px] h-[320px] sm:h-[520px] lg:h-[640px] pointer-events-none flex items-center justify-center my-4 sm:my-0">
+          <motion.div
+            style={{
+              y: shouldReduceMotion ? 0 : mascotY,
+              scale: shouldReduceMotion ? 1 : mascotScale,
+              rotateX: shouldReduceMotion ? 0 : mascotRotateX,
+              rotateY: shouldReduceMotion ? 0 : mascotRotateY,
+              x: shouldReduceMotion ? 0 : mascotTranslateX,
+            }}
+            className="relative sm:absolute right-0 sm:right-[2%] lg:right-[6%] top-0 sm:top-[2%] z-20 w-[260px] sm:w-[440px] lg:w-[560px] h-[320px] sm:h-[520px] lg:h-[640px] pointer-events-none flex items-center justify-center my-4 sm:my-0 transition-transform duration-100 ease-out"
+          >
             {/* Dynamic Radial Contact Shadow beneath Paws */}
             <div className="absolute bottom-[2%] left-[18%] right-[18%] h-[28px] sm:h-[32px] bg-amber-950/25 rounded-[100%] blur-md scale-y-50 translate-y-2 z-15" />
             
@@ -51,14 +103,14 @@ export default function Hero() {
             <div className="relative w-full h-full">
               <Image
                 src="/images/character-hero.webp"
-                alt="Comfort Grooming Apricot Teddy Doodle Mascot"
+                alt="Comfort Grooming Mascot"
                 fill
                 className="object-contain drop-shadow-xl"
                 priority
                 unoptimized
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Layer 3 (z-30): Foreground Editorial Accent Typography & Copy */}
           <div className="relative z-30 max-w-xl lg:max-w-2xl pt-2 sm:pt-40 lg:pt-44 space-y-5 sm:space-y-6">
@@ -71,33 +123,35 @@ export default function Hero() {
                 </span>
               </h2>
               <p className="text-slate-700 text-base sm:text-lg max-w-md leading-relaxed pt-1">
-                Thoughtful, one-on-one pet grooming designed for nervous & sensitive companions. Every bath, trim, and style delivered with patience and love.
+                Local dog grooming in Pinson, Alabama. Call or message Comfort Grooming to discuss currently available grooming options for your dog.
               </p>
             </div>
 
             {/* High-Contrast Action CTAs */}
             <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4">
               <a
-                href="tel:2056830220"
+                href="tel:+12056237991"
                 className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-amber-900 hover:bg-amber-950 text-amber-50 rounded-full font-medium text-base shadow-lg shadow-amber-950/15 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Phone className="w-5 h-5 text-amber-300" />
-                <span>Call (205) 683-0220</span>
+                <span>Call Comfort Grooming</span>
               </a>
 
               <a
-                href="#contact"
+                href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-white/80 hover:bg-white text-slate-800 border border-slate-300/80 rounded-full font-medium text-base shadow-sm transition-all"
               >
                 <MessageSquare className="w-5 h-5 text-amber-700" />
-                <span>Request Appointment</span>
+                <span>Message on Facebook</span>
               </a>
             </div>
 
             {/* Address bar footnote */}
             <div className="pt-1 flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
               <MapPin className="w-4 h-4 text-amber-700 flex-shrink-0" />
-              <span>4720 Center Point Rd, Pinson, AL 35126 • Open Mon–Sat</span>
+              <span>4298 Main St, Pinson, AL 35126</span>
             </div>
           </div>
 
