@@ -1,14 +1,35 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useReducedMotion } from "framer-motion";
 import { Phone, MessageSquare, MapPin } from "lucide-react";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const groomingRef = useRef<HTMLDivElement>(null);
+  const mascotRef = useRef<HTMLDivElement>(null);
+
   const shouldReduceMotion = useReducedMotion();
-  const [isDogHovered, setIsDogHovered] = useState(false);
+  const [revealDistance, setRevealDistance] = useState(130);
+
+  // Dynamic layout measurement for exact required shift to reveal final G
+  const updateRevealDistance = useCallback(() => {
+    if (!groomingRef.current || !mascotRef.current) return;
+    const groomingRect = groomingRef.current.getBoundingClientRect();
+    const mascotRect = mascotRef.current.getBoundingClientRect();
+
+    // Calculate exact shift needed so dogLeft >= groomingRight + clearance (18px)
+    const clearance = 18;
+    const computedShift = Math.max(80, Math.ceil(groomingRect.right - mascotRect.left + clearance));
+    setRevealDistance(computedShift);
+  }, []);
+
+  useEffect(() => {
+    updateRevealDistance();
+    window.addEventListener("resize", updateRevealDistance);
+    return () => window.removeEventListener("resize", updateRevealDistance);
+  }, [updateRevealDistance]);
 
   // Scroll handoff setup (Scene 1 -> Scene 2)
   const { scrollYProgress } = useScroll({
@@ -21,10 +42,10 @@ export default function Hero() {
   const mascotY = useTransform(scrollYProgress, [0, 1], [0, 40]);
   const mascotScale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
-  // Subtle rightward scroll shift to reveal GROOMING as user scrolls
-  const mascotScrollX = useTransform(scrollYProgress, [0, 0.7], [0, 32]);
+  // Dynamic rightward scroll shift to reveal final G in GROOMING as user scrolls
+  const mascotScrollX = useTransform(scrollYProgress, [0, 0.6], [0, revealDistance]);
 
-  // Pointer depth interaction (desktop only)
+  // Pointer depth & reveal interaction (desktop only)
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const hoverXValue = useMotionValue(0);
@@ -34,7 +55,7 @@ export default function Hero() {
   const mascotRotateY = useSpring(useTransform(mouseX, [-400, 400], [-1.5, 1.5]), springConfig);
   const mascotTranslateX = useSpring(useTransform(mouseX, [-400, 400], [-8, 8]), springConfig);
 
-  // Spring-animated rightward shift on hover (~30px reveal for "G")
+  // Spring-animated rightward shift on hover to reveal final G
   const mascotHoverX = useSpring(hoverXValue, springConfig);
 
   // Combined single X transform pipeline
@@ -54,12 +75,11 @@ export default function Hero() {
 
   const handleMascotMouseEnter = () => {
     if (shouldReduceMotion || window.innerWidth < 768) return;
-    setIsDogHovered(true);
-    hoverXValue.set(30); // 30px rightward shift reveals "G"
+    updateRevealDistance();
+    hoverXValue.set(revealDistance); // Dynamically calculated rightward shift reveals final G
   };
 
   const handleMascotMouseLeave = () => {
-    setIsDogHovered(false);
     hoverXValue.set(0); // Smoothly return to resting position
     mouseX.set(0);
     mouseY.set(0);
@@ -106,13 +126,17 @@ export default function Hero() {
             <h1 className="font-serif tracking-tight text-amber-950 text-[14vw] sm:text-[11vw] lg:text-[9.5rem] font-bold leading-[0.82] uppercase text-left">
               Comfort
             </h1>
-            <div className="font-serif tracking-tight text-amber-950/80 text-[13vw] sm:text-[10vw] lg:text-[8.5rem] font-medium leading-[0.85] uppercase text-left pl-[4vw] sm:pl-[8vw]">
+            <div
+              ref={groomingRef}
+              className="inline-block font-serif tracking-tight text-amber-950/80 text-[13vw] sm:text-[10vw] lg:text-[8.5rem] font-medium leading-[0.85] uppercase text-left pl-[4vw] sm:pl-[8vw]"
+            >
               Grooming
             </div>
           </motion.div>
 
           {/* Layer 2 (z-20): Candidate B Apricot Doodle Character with Reveal Motion */}
           <motion.div
+            ref={mascotRef}
             onMouseEnter={handleMascotMouseEnter}
             onMouseLeave={handleMascotMouseLeave}
             style={{
