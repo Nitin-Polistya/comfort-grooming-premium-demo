@@ -1,111 +1,105 @@
 "use client";
 
-import React, { useState, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { Phone, MessageSquare, Heart, ShieldCheck, MapPin } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const DogScene = dynamic(() => import("./3d/DogScene"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-[460px] sm:h-[520px] lg:h-[600px] flex items-center justify-center bg-stone-100/50 rounded-3xl animate-pulse text-stone-400 font-serif">
-      <span>Loading 3D Salon Experience...</span>
-    </div>
-  ),
-});
+import React from "react";
+import Image from "next/image";
+import { Phone, MessageSquare, MapPin, Sparkles, Star } from "lucide-react";
 
 export default function Hero() {
-  const [isCtaHovered, setIsCtaHovered] = useState(false);
-  const heroRef = useRef<HTMLElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -35]);
-  const textOpacity = useTransform(scrollYProgress, [0, 0.7, 1], [1, 0.9, 0.65]);
-  const sceneScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
-  const sceneY = useTransform(scrollYProgress, [0, 1], [0, -18]);
-
   return (
-    <section ref={heroRef} className="relative overflow-hidden pt-8 pb-16 md:pt-12 md:pb-24 bg-warm-ivory">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section className="relative min-h-[92vh] sm:min-h-screen bg-[#F9F6F0] text-slate-900 overflow-hidden flex flex-col justify-between pt-24 sm:pt-28 pb-12">
+      {/* Background Soft Ambient Lighting */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute -top-[20%] left-[20%] w-[600px] h-[600px] bg-amber-200/25 rounded-full blur-3xl" />
+        <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] bg-amber-300/15 rounded-full blur-3xl" />
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-center">
+        
+        {/* Top Editorial Subheader Badges */}
+        <div className="relative z-30 flex flex-wrap items-center gap-3 mb-4 sm:mb-8">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/15 text-amber-900 text-xs font-semibold tracking-wider uppercase backdrop-blur-sm">
+            <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+            <span>Pinson, AL’s Premier Pet Studio</span>
+          </div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-900/5 border border-emerald-900/15 text-emerald-800 text-xs font-medium">
+            <Star className="w-3.5 h-3.5 fill-emerald-600 text-emerald-600" />
+            <span>4.9 Star Rated • Gentle & Stress-Free</span>
+          </div>
+        </div>
+
+        {/* Art-Directed 3-Layer Interlocking Editorial Composition */}
+        <div className="relative min-h-[480px] sm:min-h-[580px] lg:min-h-[640px] flex flex-col sm:flex-row items-center sm:items-center">
           
-          <motion.div
-            style={{ y: textY, opacity: textOpacity }}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
-            className="lg:col-span-7 space-y-8 text-left"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-900/5 border border-amber-900/10 text-amber-900 text-xs font-bold tracking-wider uppercase">
-              <MapPin className="w-3.5 h-3.5 text-amber-800" />
-              <span>PINSON, ALABAMA • PET GROOMING</span>
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold font-serif text-stone-900 tracking-tight leading-[1.12]">
-              Comfort they can feel. <br />
-              <span className="text-amber-800 italic font-normal">Care you can see.</span>
+          {/* Layer 1 (z-10): Rear Massive Editorial Typography */}
+          <div className="absolute inset-x-0 top-0 sm:top-0 z-10 select-none pointer-events-none">
+            <h1 className="font-serif tracking-tight text-amber-950 text-[14vw] sm:text-[11vw] lg:text-[9.5rem] font-bold leading-[0.82] uppercase text-left opacity-[0.92]">
+              Comfort
             </h1>
+            <div className="font-serif tracking-tight text-amber-950/80 text-[13vw] sm:text-[10vw] lg:text-[8.5rem] font-medium leading-[0.85] uppercase text-left pl-[4vw] sm:pl-[8vw]">
+              Grooming
+            </div>
+          </div>
 
-            <p className="text-lg sm:text-xl text-stone-600 max-w-2xl leading-relaxed">
-              Attentive local pet grooming in Pinson, Alabama. We provide individualized care tailored to your dog's specific coat and needs. Call or message us directly to discuss the right grooming option for your pet.
-            </p>
+          {/* Layer 2 (z-20): Candidate B Apricot Doodle Character */}
+          {/* Desktop & Tablet: Central-Right positioning overlapping rear text */}
+          {/* Mobile: Centered responsive mascot below title */}
+          <div className="relative sm:absolute right-0 sm:right-[2%] lg:right-[6%] top-0 sm:top-[2%] z-20 w-[260px] sm:w-[440px] lg:w-[560px] h-[320px] sm:h-[520px] lg:h-[640px] pointer-events-none flex items-center justify-center my-4 sm:my-0">
+            {/* Dynamic Radial Contact Shadow beneath Paws */}
+            <div className="absolute bottom-[2%] left-[18%] right-[18%] h-[28px] sm:h-[32px] bg-amber-950/25 rounded-[100%] blur-md scale-y-50 translate-y-2 z-15" />
+            
+            {/* Transparent Master Character */}
+            <div className="relative w-full h-full">
+              <Image
+                src="/images/character-hero.webp"
+                alt="Comfort Grooming Apricot Teddy Doodle Mascot"
+                fill
+                className="object-contain drop-shadow-xl"
+                priority
+                unoptimized
+              />
+            </div>
+          </div>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 pt-2">
+          {/* Layer 3 (z-30): Foreground Editorial Accent Typography & Copy */}
+          <div className="relative z-30 max-w-xl lg:max-w-2xl pt-2 sm:pt-40 lg:pt-44 space-y-5 sm:space-y-6">
+            <div className="space-y-3">
+              <h2 className="text-3xl sm:text-5xl lg:text-6xl font-serif text-amber-900 italic font-normal tracking-tight leading-[1.08] drop-shadow-sm">
+                Care you can see.
+                <br />
+                <span className="text-slate-900 not-italic font-sans font-light text-2xl sm:text-4xl block pt-1.5">
+                  Comfort they can feel.
+                </span>
+              </h2>
+              <p className="text-slate-700 text-base sm:text-lg max-w-md leading-relaxed pt-1">
+                Thoughtful, one-on-one pet grooming designed for nervous & sensitive companions. Every bath, trim, and style delivered with patience and love.
+              </p>
+            </div>
+
+            {/* High-Contrast Action CTAs */}
+            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 sm:gap-4">
               <a
-                href="tel:+12056237991"
-                onMouseEnter={() => setIsCtaHovered(true)}
-                onMouseLeave={() => setIsCtaHovered(false)}
-                className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full bg-stone-900 text-white font-semibold text-base hover:bg-amber-800 active:scale-98 transition-all duration-200 shadow-lg shadow-stone-900/15 group"
+                href="tel:2056830220"
+                className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-amber-900 hover:bg-amber-950 text-amber-50 rounded-full font-medium text-base shadow-lg shadow-amber-950/15 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
-                <Phone className="w-5 h-5 text-amber-400 group-hover:scale-110 transition-transform" />
-                <span>Call to Book (+1 205-623-7991)</span>
+                <Phone className="w-5 h-5 text-amber-300" />
+                <span>Call (205) 683-0220</span>
               </a>
 
               <a
-                href="https://www.facebook.com/p/Comfort-Grooming-and-Daycare-LLC-100047778857853/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-4 rounded-full bg-white border border-stone-300 text-stone-800 font-medium text-base hover:bg-stone-100 hover:border-stone-400 active:scale-98 transition-all shadow-sm"
+                href="#contact"
+                className="inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-white/80 hover:bg-white text-slate-800 border border-slate-300/80 rounded-full font-medium text-base shadow-sm transition-all"
               >
-                <MessageSquare className="w-4 h-4 text-blue-600" />
-                <span>Message on Facebook</span>
+                <MessageSquare className="w-5 h-5 text-amber-700" />
+                <span>Request Appointment</span>
               </a>
             </div>
 
-            <div className="pt-6 border-t border-stone-900/10 grid grid-cols-2 sm:grid-cols-3 gap-4 text-stone-700 text-xs font-semibold">
-              <div className="flex items-center gap-2">
-                <Heart className="w-4 h-4 text-amber-700 shrink-0" />
-                <span>Local Pinson Salon</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
-                <span>Individualized Care</span>
-              </div>
-              <div className="flex items-center gap-2 col-span-2 sm:col-span-1">
-                <MapPin className="w-4 h-4 text-stone-700 shrink-0" />
-                <span>4298 Main St, Pinson</span>
-              </div>
+            {/* Address bar footnote */}
+            <div className="pt-1 flex items-center gap-2 text-xs sm:text-sm text-slate-500 font-medium">
+              <MapPin className="w-4 h-4 text-amber-700 flex-shrink-0" />
+              <span>4720 Center Point Rd, Pinson, AL 35126 • Open Mon–Sat</span>
             </div>
-
-          </motion.div>
-
-          <motion.div
-            style={{ scale: sceneScale, y: sceneY }}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="relative z-10 bg-gradient-to-b from-stone-100/90 via-amber-50/40 to-stone-100/80 rounded-3xl p-2 border border-stone-200/80 shadow-2xl shadow-stone-900/5">
-              <DogScene isCtaHovered={isCtaHovered} />
-            </div>
-
-            <div className="absolute -bottom-6 -right-6 w-64 h-64 bg-amber-200/30 rounded-full blur-2xl pointer-events-none -z-10" />
-          </motion.div>
+          </div>
 
         </div>
       </div>
